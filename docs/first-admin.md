@@ -42,17 +42,17 @@ Add these values to `.env.local` and to the Vercel project settings:
 
 ```dotenv
 NEXT_PUBLIC_SUPABASE_URL=https://YOUR_PROJECT.supabase.co
-NEXT_PUBLIC_SUPABASE_ANON_KEY=YOUR_PUBLIC_ANON_KEY
+NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=YOUR_PUBLIC_PUBLISHABLE_KEY
 NEXT_PUBLIC_SITE_URL=http://127.0.0.1:3000
 ```
 
-Use the project URL and public anon/publishable key from Supabase. The browser must never receive the service-role key.
+Use the project URL and public publishable key from Supabase. No service-role key is needed by this application.
 
 Restart the local Next.js server, open `/admin/login`, and sign in. After confirming access, change the temporary password through a controlled Supabase password-reset flow.
 
 ## Additional staff
 
-- `admin`: all modules, including media uploads, affiliate links, analytics, users, logs, and restricted settings.
-- `editor`: products, buying guides, categories, navigation, and non-sensitive content settings.
+- `admin`: products, buying guides, publishing controls, and verified affiliate-link changes.
+- `editor`: product and buying-guide editorial work without affiliate-link or role changes.
 
 Create each Auth user deliberately, then insert a matching `profiles` row. Editors cannot promote themselves; the database blocks role and account-email changes unless an administrator performs them.

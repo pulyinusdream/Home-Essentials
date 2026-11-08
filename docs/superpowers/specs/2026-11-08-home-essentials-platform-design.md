@@ -8,12 +8,12 @@ The existing static publication remains a reference and fallback. This project i
 
 ## Goals
 
-- Make product editing the strongest administrative workflow: structured sections, clear validation, image management, exact affiliate-link preservation, preview, status changes, and an unsaved-changes warning.
+- Make product editing the strongest administrative workflow: structured sections, clear validation, authorized image URLs, exact affiliate-link preservation, preview, status changes, and an unsaved-changes warning.
 - Make buying guides structured and reusable, with safe editorial blocks and product recommendation blocks rather than raw unsanitized HTML.
 - Make compliance a system property: required disclosure placement, Amazon-host validation, no open redirects, no invented prices/ratings/reviews, and no public purchase action without an active verified link.
 - Enforce authorization twice: server-side role checks in the application and RLS/grants in PostgreSQL.
 - Publish immediately from the database. A published record appears on public routes without a source change or deployment.
-- Capture outbound clicks without claiming purchases, sales, or commissions.
+- Keep Amazon destinations exact and directly inspectable without link cloaking or an intermediate redirect.
 - Support SEO, Pinterest previews, responsive layouts, accessibility, loading/empty/error/success states, and reduced motion.
 
 ## Non-goals and anti-goals
@@ -29,13 +29,12 @@ The existing static publication remains a reference and fallback. This project i
 
 ### Application boundary
 
-Use Next.js 16 App Router with Server Components by default. Server Actions handle authenticated mutations. Route Handlers are reserved for machine-oriented behavior such as the outbound redirect. `proxy.ts` refreshes Supabase sessions and performs only an optimistic admin-route redirect; every protected layout and mutation performs a secure database-backed role check.
+Use Next.js 16 App Router with Server Components by default. Server Actions handle authenticated mutations. `proxy.ts` refreshes Supabase sessions and performs only an optimistic admin-route redirect; every protected layout and mutation performs a secure database-backed role check.
 
 The application is divided into:
 
-- `src/app/(public)`: indexable publication routes.
+- `src/app`: indexable publication routes plus the protected administration route group.
 - `src/app/admin`: protected CMS routes.
-- `src/app/go/[slug]`: validated outbound redirect.
 - `src/components`: public, admin, editor, and shared UI.
 - `src/lib`: Supabase clients, authorization, validation, SEO, affiliate safety, and utilities.
 - `src/services`: database access and DTO mapping. Components do not contain raw queries.
@@ -45,7 +44,7 @@ The application is divided into:
 
 Create the required tables plus `media_assets`, which is necessary for a real centralized media library. Use relational joins for tags and article recommendations; JSONB is limited to flexible specifications, feature lists, and structured article blocks.
 
-The `profiles.role` value is controlled only by privileged database/admin operations. A private `has_role(required_roles text[])` security-definer function reads the authenticated user's profile with an empty `search_path`. Policies call this helper. Anonymous grants are explicitly limited to public reads and click insertion through a controlled function; authenticated grants are similarly narrow.
+The `profiles.role` value is controlled only by privileged database/admin operations. A private `has_role(required_roles text[])` security-definer function reads the authenticated user's profile with an empty `search_path`. Policies call this helper. Anonymous grants are explicitly limited to public reads. The exact affiliate URL is readable only through an RLS policy requiring an active verified link, a published product, and an active category; authenticated grants are similarly narrow.
 
 Public reads require all relevant publication flags: active categories, published products/articles, public settings, and images belonging to published content. Editors can manage editorial content but cannot manage profiles, administrator-only settings, or security. Administrators can manage all application data. Activity-log rows are append-only to normal authenticated users.
 
@@ -55,7 +54,7 @@ The first administrator is created through the Supabase dashboard or server-side
 
 The product editor is one form with a sticky section index: Basics, Images, Specifications, Amazon, Recommendation, Pricing, SEO, and Publishing. Draft saves require only a name; publishing requires a slug, active category, description, main image with alt text, recommendation, SEO description, and an active valid Amazon US affiliate link. Validation errors link back to their section. The editor warns before leaving with local unsaved changes.
 
-Affiliate URLs are stored exactly as supplied. Validation parses the URL, requires HTTPS, rejects credentials and nonstandard ports, and allows only `amazon.com`, `www.amazon.com`, or subdomains ending in `.amazon.com`. Redirects query by product slug and active link ID; visitors never submit the destination.
+Affiliate URLs are stored exactly as supplied. Validation parses the URL, requires HTTPS, rejects credentials and nonstandard ports, and allows only `amazon.com`, `www.amazon.com`, or subdomains ending in `.amazon.com`. Public product pages render the exact RLS-approved Special Link directly; there is no shortening, cloaking, or intermediate redirect.
 
 Article content is an ordered JSON block array with a small safe vocabulary: paragraph, heading, list, image, product recommendation, and related article. This avoids unsafe arbitrary HTML and makes public rendering, previews, and future migrations predictable. A focused block editor can be extended without changing published content.
 
@@ -63,11 +62,11 @@ Prices are hidden by default. Public price output requires `price_source = 'amaz
 
 ### Analytics and privacy
 
-`/go/[slug]` verifies publication and link state, records the product, optional article, landing page, referrer, and UTM fields, then redirects to the exact stored URL. The event contains no claimed purchase or revenue. A random first-party session token may be hashed server-side for approximate unique-session counts when `CLICK_HASH_SECRET` is configured; raw IP addresses and raw session tokens are not stored. If event insertion fails, the safe redirect still succeeds and the server records an operational error.
+The simple launch does not add a first-party affiliate redirect or claim purchase, sales, or commission analytics. Amazon Associates reporting remains the source for attributed commerce. Ordinary hosting logs may still exist under the hosting provider's policies.
 
 ### Media
 
-Supabase Storage uses a public-read `public-media` bucket and authenticated write policies. Upload actions validate MIME type, extension, and a 5 MB default limit, generate collision-resistant paths, and persist alt text/metadata in `media_assets`. Deletion checks product/article references and requires explicit confirmation when an unpublished reference exists; published references block deletion until reassigned.
+The database includes a future-ready Supabase Storage boundary, but the simple launch does not expose a media-library interface. Editors paste a public HTTPS image URL they are authorized to use and provide alt text in the product or guide editor.
 
 ## Experience design
 
@@ -79,29 +78,29 @@ Mode: Persuade for landing/category/product pages and Read for buying guides. Pr
 
 Mode: Operate. The shell uses the same materials but is denser and quieter: a light sidebar, 24 px noun titles, tabular figures, hairline divisions, no decorative metric icons, and one near-black primary action per screen. Product forms keep labels visible, validate on blur and submit, preserve typed data after an error, and expose save state. Tables become two-line list rows on phones; actions remain reachable with 44 px targets.
 
-Charts render only real query results. Empty analytics show a zero axis and plain explanation rather than sample data. Loading skeletons match final dimensions; errors name the failed action and a recovery path.
+Loading skeletons match final dimensions; errors name the failed action and a recovery path. The launch dashboard does not fabricate analytics or decorative metrics.
 
 ## Operational states
 
 - Missing Supabase configuration: public pages show a setup-safe empty state; admin login explains configuration is required. Builds do not leak secret values.
 - Unauthenticated: admin routes redirect to `/admin/login?next=...`.
 - Authenticated without role: return an access-denied screen and sign-out action.
-- Empty database: categories may be seeded; products, guides, analytics, and media show truthful empty states.
+- Empty database: categories may be seeded; products and guides show truthful empty states.
 - Invalid or missing affiliate link: public product remains readable but the purchase action is absent.
 - Storage/database failure: keep form input, show a field or form-level message, and avoid false success toasts.
 
 ## Approaches considered
 
-1. Keep expanding the static generator. It is reliable for previews but cannot satisfy database-driven publishing, authentication, storage, analytics, or immediate updates.
-2. Use a headless third-party CMS plus Supabase analytics. This shortens article editing but splits authorization and product/link compliance across systems.
+1. Keep expanding the static generator. It is reliable for previews but cannot satisfy database-driven publishing, authentication, or immediate updates.
+2. Use a headless third-party CMS plus Supabase. This shortens article editing but splits authorization and product/link compliance across systems.
 3. Build one Next.js and Supabase application. This keeps editorial data, roles, media, outbound links, and public rendering under one RLS-backed model. This is the chosen approach because the requested workflows share the same product and publication state.
 
 ## Delivery sequence
 
 1. Establish the Next.js application, design tokens, Supabase clients, schema, grants/RLS, storage, seed, and generated-compatible database types.
 2. Build authentication, protected layouts, and authorization helpers.
-3. Build the product and guide workflows, then supporting category/media/link/settings administration.
+3. Build the product and guide workflows, using seeded categories and administrator-controlled links.
 4. Connect the public publication to the same services.
-5. Add outbound redirect analytics, SEO/Pinterest metadata, QA, and deployment documentation.
+5. Add direct-link compliance, SEO/Pinterest metadata, QA, and deployment documentation.
 
 The project can be built and statically checked without credentials, but real authentication, RLS, Storage, and publish-to-public behavior require the owner to create a Supabase project, apply migrations, and supply environment values.

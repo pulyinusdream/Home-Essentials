@@ -1,81 +1,89 @@
-# Home Essentials database setup
+# Hosted Supabase setup
 
-The database is the source of truth for publication state, staff roles, verified affiliate destinations, and public visibility. Public sign-up is disabled by design. Create staff accounts deliberately and keep the service-role key on the server.
+Hosted Supabase is the database, authentication provider, and authorization boundary for Home Essentials. Docker is not required.
 
-## Recommended setup: hosted Supabase
+## 1. Create the project
 
-For this project, use a hosted Supabase project. Docker is not required to run the website, use the admin dashboard, or deploy to Vercel.
+Create a Supabase project and wait until its database is ready. From the project **Connect** panel, copy:
 
-1. Create a Supabase project.
-2. Link this repository with `npx supabase@3.0.0 link --project-ref PROJECT_REF`.
-3. Review the pending migration list with `npx supabase@3.0.0 db push --dry-run`.
-4. Apply the migrations with `npx supabase@3.0.0 db push`.
-5. Copy `.env.example` to `.env.local` and add the hosted project URL and anon key.
-6. Configure the same values in Vercel; keep `SUPABASE_SERVICE_ROLE_KEY` server-only and do not add it unless a documented server workflow requires it.
-7. Set the Supabase Auth site URL and allowed redirect URLs to the local URL and final HTTPS Vercel/custom domain.
-8. Keep public sign-up disabled and create the first administrator through the controlled process below.
+- Project URL
+- Publishable key
 
-## Optional local database verification
+Create `.env.local` from `.env.example` and set:
 
-This section is for developers who want to execute the SQL and RLS tests in an isolated local database. It is optional and is not part of the deployed architecture.
-
-Requirements:
-
-- Node.js 22.13 or newer
-- Docker Desktop running
-- Supabase CLI 3.x (the commands below use `npx`, so no global install is required)
-
-From the project root:
-
-```powershell
-npx supabase@3.0.0 start
-npx supabase@3.0.0 db reset
-npx supabase@3.0.0 test db
-npx supabase@3.0.0 status
+```dotenv
+NEXT_PUBLIC_SUPABASE_URL=https://YOUR_PROJECT.supabase.co
+NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=YOUR_PUBLIC_PUBLISHABLE_KEY
+NEXT_PUBLIC_SITE_URL=http://127.0.0.1:3000
+NEXT_PUBLIC_CONTACT_EMAIL=YOUR_PUBLIC_CONTACT_EMAIL
 ```
 
-Copy `.env.example` to `.env.local`, then use the local API URL, anon key, and service-role key printed by `supabase status`. Never expose `SUPABASE_SERVICE_ROLE_KEY` through a `NEXT_PUBLIC_` variable.
+The publishable key is intentionally public. RLS controls what it can read or change. This application does not need a service-role key.
 
-The local services use these default URLs:
+## 2. Apply the schema
 
-- API: `http://127.0.0.1:54321`
-- Studio: `http://127.0.0.1:54323`
-- Mail viewer: `http://127.0.0.1:54324`
-- Website: `http://127.0.0.1:3000`
+Recommended remote CLI workflow:
 
-## Create the first administrator
+```powershell
+npx supabase@3.0.0 link --project-ref YOUR_PROJECT_REF
+npx supabase@3.0.0 db push --dry-run
+npx supabase@3.0.0 db push
+```
 
-1. Create the user from Supabase Studio under Authentication, or invite the user from the hosted Supabase dashboard.
-2. Copy the new user's UUID.
-3. As the database owner, insert the corresponding profile:
+Then run `supabase/seed.sql` once through the Supabase SQL Editor. It inserts seven real category labels and no products.
+
+If you do not use the CLI, open the SQL Editor and run every file under `supabase/migrations` in filename order, followed by `supabase/seed.sql`.
+
+## 3. Configure authentication
+
+In **Authentication → URL Configuration**:
+
+- Set the production site URL to the final HTTPS domain.
+- Add `http://127.0.0.1:3000/**` for local development.
+- Add the required Vercel preview pattern only if preview sign-in is needed.
+
+Keep public sign-up disabled. Follow `docs/first-admin.md` to create the first Auth user and matching `public.profiles` row.
+
+## 4. Security model
+
+- Anonymous users can read active categories and published products or guides only.
+- Anonymous users can read an exact affiliate URL only when its link is active and verified and its product is published in an active category.
+- Editors can manage editorial products and guides but cannot change affiliate links or promote users.
+- Administrators can add and verify Amazon links.
+- Product publication is rejected by PostgreSQL unless required content and an active verified Amazon US link exist.
+- Article publication is rejected unless its required editorial fields and structured content exist.
+- Staff roles come from `public.profiles`, never editable user metadata.
+- Manual prices are not accepted as live product prices.
+
+## 5. Create the administrator
+
+Create the user under **Authentication → Users**, copy the UUID, then run as the database owner:
 
 ```sql
 insert into public.profiles (id, email, full_name, role)
-values ('USER_UUID', 'admin@example.com', 'Administrator', 'admin');
+values ('USER_UUID', 'YOUR_EMAIL', 'Administrator', 'admin');
 ```
 
-Do not store authorization roles in `raw_user_meta_data`. Database policies resolve roles from `public.profiles`, and non-admin users cannot promote themselves.
+The UUID must already exist in `auth.users`.
 
-## Safety rules
+## 6. Verify
 
-- Only active `amazon.com` affiliate URLs can satisfy product publication checks.
-- A product cannot be published without a category, recommendation summary, disclosure-ready content, primary image, and active affiliate link.
-- A guide cannot be published without a dek, category, cover image, and valid structured content blocks.
-- Prices default to unavailable. Store price data only when it comes from an approved Amazon API workflow and retain the source timestamp.
-- Product and article rows are publicly readable only after publication. Drafts, affiliate-link records, click analytics, activity logs, and staff profiles remain protected by RLS.
-- The `public-media` bucket accepts only image MIME types up to 5 MiB. Administrator-only write access is enforced by storage policies.
-
-## Verification
-
-Run the project checks after every schema or policy change:
+Run the application checks:
 
 ```powershell
 npm run test
 npm run lint
 npm run typecheck
 npm run build
-npx supabase@3.0.0 db reset
-npx supabase@3.0.0 test db
 ```
 
-`tests/database/schema.test.ts` verifies the migration contract without Docker. The pgTAP suite in `supabase/tests/rls.test.sql` can additionally verify behavior against a local PostgreSQL/Supabase stack or a dedicated non-production test project.
+Then verify with the hosted project:
+
+1. Sign in at `/admin/login`.
+2. Save a draft product.
+3. Add and confirm a real Associates link as an administrator.
+4. Preview and publish the product.
+5. Confirm its public product page contains the exact direct Amazon URL.
+6. Unpublish it and confirm the public page becomes unavailable.
+
+The pgTAP files in `supabase/tests` provide an optional deeper RLS integration suite for a dedicated test project or local database. They are not required to run or deploy the website.

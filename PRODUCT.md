@@ -24,17 +24,18 @@ Practical home finds are presented as editorial guidance, with measurements, tra
 
 ## Operating Context
 
-Editors work with product names, ASINs, verified Amazon affiliate URLs, owned or licensed images, categories, structured recommendations, SEO metadata, article blocks, and publication states. Visitors browse categories and guides, then use a controlled outbound redirect to Amazon US.
+Editors work with product names, ASINs, verified Amazon affiliate URLs, owned or licensed images, categories, structured recommendations, SEO metadata, article blocks, and publication states. Visitors browse categories and guides, then follow the exact verified Special Link directly to Amazon US.
 
 ## Capabilities and Constraints
 
 - Private `admin` and `editor` roles; no public administrator registration.
 - Supabase RLS is the authoritative data-access boundary.
-- Product, category, guide, media, affiliate-link, settings, navigation, analytics, user, and activity-log administration.
+- Product and buying-guide administration, with seeded categories and administrator-controlled affiliate links.
+- Image URLs and alt text are entered in the editor; a media-library interface is outside the simple launch scope.
 - No checkout, cart, inventory, order, payment, or fulfillment functionality.
 - No Amazon scraping, invented prices, reviews, ratings, sales, or commission figures.
 - Prices are hidden unless supplied through a compliant current data source.
-- Amazon links remain exact and are validated before use; visitors never provide redirect destinations.
+- Amazon links remain exact, are validated before use, and render directly without cloaking or an intermediate redirect.
 
 ## Brand Commitments
 

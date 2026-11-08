@@ -2,9 +2,9 @@
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Goal:** Build a Supabase-backed affiliate publishing platform in which authorized staff can create and publish products and buying guides that appear immediately on the public Home Essentials website, with safe Amazon redirects and click analytics.
+**Goal:** Build a Supabase-backed affiliate publishing platform in which authorized staff can create and publish products and buying guides that appear immediately on the public Home Essentials website with exact, directly inspectable Amazon Special Links.
 
-**Architecture:** A Next.js 16 App Router application uses Server Components for reads, Server Actions for authenticated mutations, Supabase SSR for cookie sessions, PostgreSQL RLS for authoritative access control, Storage for media, and service modules for all queries. Public content and the admin CMS share DTOs and validation; `/go/[slug]` is the only outbound affiliate redirect boundary.
+**Architecture:** A Next.js 16 App Router application uses Server Components for reads, Server Actions for authenticated mutations, Supabase SSR for cookie sessions, PostgreSQL RLS for authoritative access control, Storage for media, and service modules for all queries. Public content and the admin CMS share DTOs and validation; exact verified Amazon Special Links render directly under a publication-aware RLS policy.
 
 **Tech Stack:** Next.js 16, React 19, TypeScript strict, Tailwind CSS 4, shadcn/ui, Lucide React, Zod, Supabase PostgreSQL/Auth/Storage, `@supabase/ssr`, `@supabase/supabase-js`, Vitest, Testing Library, Playwright.
 
@@ -14,7 +14,7 @@
 
 - Preserve the existing static deliverable; implement in the separate `work/home-essentials` application and export a clean source deliverable later.
 - No checkout, cart, inventory, orders, payments, public registration, fake commerce data, fake reviews/ratings, or Amazon scraping.
-- Preserve verified affiliate URLs exactly; validate HTTPS Amazon US hosts and never accept a visitor-supplied redirect destination.
+- Preserve verified affiliate URLs exactly, validate HTTPS Amazon US hosts, and render the approved URL directly without cloaking.
 - Enforce every privileged action through both server-side role checks and RLS; never expose a service-role key to browser code.
 - Server Components are the default; client components exist only for local form state, interactive editors, dialogs, and navigation.
 - Public prices render only from compliant API data verified within 24 hours; otherwise hide the price.
@@ -24,7 +24,7 @@
 
 ## Review Focus
 
-- A malicious affiliate URL with credentials, a deceptive Amazon-like hostname, HTTP, or a nonstandard port must be rejected before storage and redirect.
+- A malicious affiliate URL with credentials, a deceptive Amazon-like hostname, HTTP, or a nonstandard port must be rejected before storage and public rendering.
 - An editor must never promote themselves, manage users, or change administrator-only security/legal settings through either UI or direct Data API calls.
 - A draft, archived record, inactive category, or product without an active link must never expose a public purchase action.
 - A failed database or Storage mutation must keep entered form data and report the error without a success state.
@@ -148,21 +148,20 @@
 - [ ] Implement sitemap, robots, Organization/Article/BreadcrumbList structured data, OG/Twitter/Pinterest metadata, and canonical URLs.
 - [ ] Run unit, browser, responsive, accessibility, type, lint, and build checks; commit `feat: connect the public publication`.
 
-### Task 8: Safe outbound redirect and analytics
+### Task 8: Direct affiliate links and compliance
 
 **Files:**
-- Create: `src/app/go/[slug]/route.ts`, `src/services/analytics/*`, `src/app/admin/(protected)/analytics/page.tsx`, `src/components/admin/analytics/**`, `src/lib/analytics/attribution.ts`
-- Test: `src/lib/analytics/__tests__/attribution.test.ts`, `tests/affiliate/redirect.spec.ts`
+- Create: `supabase/migrations/006_public_affiliate_links.sql`, `tests/security/platform-security.spec.ts`
+- Modify: public product repository and product detail route
 
 **Interfaces:**
-- Produces: safe redirect lookup, click insertion, UTM/referrer normalization, optional session hashing, date-filtered aggregates, CSV export, and truthful analytics views.
-- Consumes: validated active affiliate link from Task 4 and product/category/article data from earlier tasks.
+- Produces: direct exact-link output restricted to active verified links for visible products.
+- Consumes: validated active affiliate link from Task 4 and public product visibility from Task 7.
 
-- [ ] Write redirect tests for draft products, missing/inactive links, deceptive stored destinations, insertion failure, and exact URL preservation; verify RED.
-- [ ] Implement redirect route and attribution normalization so destinations never come from query parameters; run GREEN.
-- [ ] Write aggregate/date-window/Pinterest-source tests; verify RED then implement analytics queries and export.
-- [ ] Build real charts/tables with zero-data states and explicit separation between clicks and unavailable purchase/commission data.
-- [ ] Run tests, typecheck, lint, and build; commit `feat: add affiliate click analytics`.
+- [ ] Add a narrow anonymous RLS read policy for active links whose products and categories are public.
+- [ ] Render the exact stored Special Link directly and keep the disclosure adjacent to the action.
+- [ ] Add regression tests against service-role dependence, link cloaking, unsafe hosts, drafts, and inactive links.
+- [ ] Run tests, typecheck, lint, and build; include with the public publication commit.
 
 ### Task 9: Compliance, deployment, and full-system QA
 
@@ -174,8 +173,8 @@
 - Produces: owner setup path, Vercel/Supabase deployment instructions, compliance checklist, security regression suite, and final verification record.
 - Consumes: every preceding task.
 
-- [ ] Write security tests for role escalation, secret exposure, arbitrary redirect attempts, unpublished reads, and Storage writes; verify they would catch regressions.
+- [ ] Write security tests for role escalation, secret exposure, link cloaking, unpublished reads, and Storage writes; verify they would catch regressions.
 - [ ] Run available Supabase database tests against a local or dedicated test project; document any unverified integration explicitly.
-- [ ] Run the complete owner workflow: login, create draft product, upload image, attach active affiliate URL, preview, publish, observe public visibility, click redirect, and observe analytics.
+- [ ] Run the complete owner workflow: login, create draft product, add an image, attach an active affiliate URL, preview, publish, observe public visibility, and inspect the exact direct Amazon anchor.
 - [ ] Run unit tests, lint, typecheck, production build, Playwright at 375/768/1024/1440 px, keyboard checks, reduced-motion checks, and design inspectors.
 - [ ] Create a clean source archive without `node_modules`, `.next`, local credentials, or test artifacts; commit `docs: prepare Home Essentials deployment`.
