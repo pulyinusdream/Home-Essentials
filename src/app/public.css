@@ -1,18 +1,22 @@
 /* Public publication only. Admin routes keep the legacy tokens in globals.css. */
+body:has(> .public-site) {
+  background: #e5e1d8;
+}
+
 .public-site {
   --public-bg: #e5e1d8;
   --public-surface: #dad5ca;
   --public-ink: #2a1d17;
-  --public-muted: #6b5b51;
+  --public-muted: #5b4d45;
   --public-accent: #456f3a;
   --public-accent-ink: #ffffff;
   --public-focus: #456f3a;
   --public-rule: #c8c1b5;
   --public-margin: clamp(1rem, 2.2vw, 2rem);
   --public-gutter: clamp(0.75rem, 1.4vw, 1.5rem);
-  --public-small: clamp(0.8125rem, 0.79rem + 0.1vw, 0.875rem);
-  --public-body: clamp(1rem, 0.96rem + 0.18vw, 1.125rem);
-  --public-lead: clamp(1.125rem, 1.02rem + 0.42vw, 1.375rem);
+  --public-small: 0.875rem;
+  --public-body: 1rem;
+  --public-lead: 1.25rem;
   --public-heading: clamp(2.25rem, 1.72rem + 2.2vw, 3.75rem);
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
   --ease-soft: cubic-bezier(0.33, 1, 0.68, 1);
@@ -74,18 +78,18 @@
   border: 0;
   background: var(--public-accent);
   color: var(--public-accent-ink);
-  font: 500 12px/1 var(--font-public), "Segoe UI", sans-serif;
+  font: 500 14px/1 var(--font-public), "Segoe UI", sans-serif;
   letter-spacing: 0.04em;
 }
 
 .public-site .brand__name {
-  font: 500 17px/1.1 var(--font-public), "Segoe UI", sans-serif;
+  font: 500 16px/1.1 var(--font-public), "Segoe UI", sans-serif;
   letter-spacing: -0.02em;
 }
 
 .public-site .public-nav {
   gap: clamp(20px, 2.1vw, 34px);
-  font-size: 15px;
+  font-size: 16px;
 }
 
 .public-site .public-nav a,
@@ -108,7 +112,7 @@
   padding: 12px;
   border: 0;
   background: var(--public-surface);
-  box-shadow: none;
+  box-shadow: none; /* taste-skill-ignore shadow: reset the legacy menu shadow on this real overlay */
 }
 
 .public-site .mobile-menu__panel a {
@@ -147,7 +151,7 @@
 .public-site .hero__copy > p {
   max-width: 34ch;
   margin: 30px 0 0;
-  color: var(--public-muted);
+  color: var(--public-ink);
   font-size: var(--public-lead);
   line-height: 1.42;
   text-wrap: pretty;
@@ -254,7 +258,7 @@
   max-width: 40ch;
   margin: 0;
   justify-self: end;
-  color: var(--public-muted);
+  color: var(--public-ink);
   line-height: 1.5;
 }
 
@@ -288,8 +292,8 @@
 
 .public-site .category-card small {
   margin: 0;
-  color: var(--public-muted);
-  font-size: 14px;
+  color: var(--public-ink);
+  font-size: 16px;
   font-weight: 400;
   line-height: 1.42;
   text-wrap: pretty;
@@ -299,6 +303,21 @@
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 52px var(--public-gutter);
+}
+
+.public-site .public-product-grid:has(> .public-product-card:only-child) {
+  grid-template-columns: minmax(0, 640px);
+}
+
+.public-site .public-product-grid:has(> .public-product-card:only-child) .public-product-card > a {
+  display: grid;
+  grid-template-columns: minmax(220px, 0.9fr) minmax(250px, 1.1fr);
+  gap: var(--public-gutter);
+  align-items: center;
+}
+
+.public-site .public-product-grid:has(> .public-product-card:only-child) .public-product-card__copy {
+  padding-top: 0;
 }
 
 .public-site .public-product-card > a {
@@ -331,7 +350,7 @@
   padding: 6px 9px;
   background: var(--public-accent);
   color: var(--public-accent-ink);
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 500;
   letter-spacing: 0;
   text-transform: none;
@@ -364,8 +383,8 @@
 }
 
 .public-site .public-product-card__copy > span {
-  color: var(--public-muted);
-  font-size: 14px;
+  color: var(--public-ink);
+  font-size: 16px;
   line-height: 1.45;
 }
 
@@ -378,18 +397,18 @@
 
 .public-site .public-product-card__copy strong {
   padding: 0;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 500;
   font-variant-numeric: tabular-nums;
 }
 
-.public-site .public-product-card__copy > div > span {
+.public-site .public-product-card__copy > div > .public-product-card__arrow {
   padding: 0;
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  gap: 0;
   color: var(--public-muted);
-  font-size: 13px;
+  font-size: 16px;
   letter-spacing: 0;
   text-transform: none;
 }
@@ -422,7 +441,7 @@
 
 .public-site .public-article-card > a > div > span {
   color: var(--public-muted);
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1.45;
 }
 
@@ -461,6 +480,12 @@
   font-size: var(--public-lead);
   line-height: 1.45;
   text-wrap: pretty;
+}
+
+.public-site .public-page-meta {
+  margin: 18px 0 0;
+  color: var(--public-muted);
+  font-size: var(--public-small);
 }
 
 .public-site .public-listing {
@@ -576,7 +601,7 @@
   display: grid;
   align-content: start;
   gap: 18px;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1.5;
 }
 
@@ -612,6 +637,22 @@
 }
 
 @media (prefers-reduced-motion: no-preference) {
+  .public-site .hero h1 span {
+    animation: public-hero-line 800ms var(--ease-out) both;
+  }
+
+  .public-site .hero h1 span:nth-child(2) {
+    animation-delay: 80ms;
+  }
+
+  .public-site .hero__copy > p {
+    animation: public-hero-copy 640ms var(--ease-out) 180ms both;
+  }
+
+  .public-site .hero__actions {
+    animation: public-hero-copy 640ms var(--ease-out) 260ms both;
+  }
+
   .public-site .hero-room-gallery__frame {
     animation: public-room-crossfade 28s linear infinite both;
   }
@@ -624,6 +665,65 @@
   .public-site .hero-room-gallery.is-paused .hero-room-gallery__frame {
     animation-play-state: paused;
   }
+}
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .public-site .section-heading h2 {
+      animation: public-heading-arrive linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 82%;
+    }
+
+    .public-site .section-heading > p,
+    .public-site .section-heading > .text-link {
+      animation: public-support-arrive linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 78%;
+    }
+
+    .public-site .category-card__image {
+      animation: public-tile-open linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 75%;
+    }
+
+    .public-site .public-product-card__media {
+      animation: public-product-settle linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 78%;
+    }
+  }
+}
+
+@keyframes public-hero-line {
+  from { transform: translateY(12px); }
+  to { transform: none; }
+}
+
+@keyframes public-hero-copy {
+  from { transform: translateY(8px); }
+  to { transform: none; }
+}
+
+@keyframes public-heading-arrive {
+  from { transform: translateY(14px); }
+  to { transform: none; }
+}
+
+@keyframes public-support-arrive {
+  from { transform: translateY(9px); }
+  to { transform: none; }
+}
+
+@keyframes public-tile-open {
+  from { clip-path: inset(0 0 12% 0); }
+  to { clip-path: inset(0); }
+}
+
+@keyframes public-product-settle {
+  from { transform: scale(0.98); }
+  to { transform: none; }
 }
 
 @keyframes public-room-crossfade {
@@ -783,12 +883,25 @@
     grid-template-columns: 1fr;
   }
 
+  .public-site .public-product-card > a,
+  .public-site .public-product-grid:has(> .public-product-card:only-child) .public-product-card > a {
+    display: grid;
+    grid-template-columns: 132px minmax(0, 1fr);
+    gap: 16px;
+    align-items: start;
+  }
+
   .public-site .public-product-card__copy {
-    padding-top: 13px;
+    padding-top: 0;
   }
 
   .public-site .public-product-card h2 {
-    font-size: 20px;
+    font-size: 18px;
+    -webkit-line-clamp: 3;
+  }
+
+  .public-site .public-product-card__copy > span {
+    font-size: 15px;
   }
 
   .public-site .public-page-hero {

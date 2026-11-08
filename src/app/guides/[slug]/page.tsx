@@ -56,7 +56,6 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
       </div>
       <article className="public-guide">
         <header className="public-guide__header page-width">
-          <p className="eyebrow">{category?.name || "Home Essentials guide"}</p>
           <h1>{article.title}</h1>
           <p>{article.excerpt}</p>
           <div>

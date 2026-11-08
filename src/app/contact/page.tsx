@@ -7,7 +7,7 @@ export const metadata: Metadata = { title: "Contact", alternates: { canonical: "
 export default function ContactPage() {
   const email = validEmail(process.env.NEXT_PUBLIC_CONTACT_EMAIL);
   return (
-    <ContentPage eyebrow="Contact" title="Questions, corrections, or a product concern?" introduction="We welcome factual corrections and feedback about published recommendations.">
+    <ContentPage title="Questions, corrections, or a product concern?" introduction="We welcome factual corrections and feedback about published recommendations.">
       <section>
         <h2>Get in touch</h2>
         {email ? <p>Email <a href={`mailto:${email}`}>{email}</a>. Please include the page address when reporting a correction or broken link.</p> : <p>The public contact address has not been configured yet. Add <code>NEXT_PUBLIC_CONTACT_EMAIL</code> in Vercel before launch.</p>}

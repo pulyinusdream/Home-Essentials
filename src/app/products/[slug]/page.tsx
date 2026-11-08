@@ -69,7 +69,6 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
           ) : <div className="is-empty" aria-hidden="true" />}
         </div>
         <div className="public-product-detail__summary">
-          <p className="eyebrow">{product.category?.name || product.subcategory || "Home essential"}</p>
           <h1>{product.name}</h1>
           {product.brand ? <p className="public-product-detail__brand">By {product.brand}</p> : null}
           <p className="public-product-detail__intro">{product.short_description}</p>
@@ -97,7 +96,6 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
 
       <div className="public-product-content page-width">
         <section className="public-editorial-callout">
-          <p className="eyebrow">Our recommendation</p>
           <h2>Why it may earn a place at home</h2>
           <p>{product.recommendation}</p>
         </section>

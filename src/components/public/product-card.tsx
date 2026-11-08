@@ -43,8 +43,8 @@ export function ProductCard({ product }: { product: PublicProductCard }) {
             ) : (
               <strong>View recommendation</strong>
             )}
-            <span>
-              View product details
+            <span className="public-product-card__arrow">
+              <span className="sr-only">View product details</span>
               <ArrowRight aria-hidden="true" strokeWidth={1.7} />
             </span>
           </div>
