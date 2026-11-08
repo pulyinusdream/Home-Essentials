@@ -1,5 +1,6 @@
 # Dependencies
 /node_modules/
+/node_modules.stale/
 /.pnp
 .pnp.*
 # Keep authored Yarn tooling if the project adopts Yarn.
@@ -19,6 +20,9 @@ next-env.d.ts
 
 # Test output
 /coverage/
+/playwright-report/
+/test-results/
+/.superpowers/
 
 # Package-manager logs
 npm-debug.log*

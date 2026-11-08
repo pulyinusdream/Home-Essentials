@@ -1,529 +1,231 @@
 {
  "version": 1,
- "at": "2026-11-08T01:22:03.138Z",
- "seed": 1243596604,
- "redraws": 0,
+ "kind": "app",
+ "at": "2026-11-08T02:31:21.347Z",
+ "seed": 1629723432,
  "input": {
-  "brief": "Home Essentials, Amazon.com home finds and practical buying guides for US shoppers arriving from Pinterest",
-  "sector": "ecommerce",
-  "tone": "warm",
-  "have": [],
-  "keep": [],
-  "avoid": [],
-  "sections": [
-   "showcase",
+  "kind": "smb-admin",
+  "brief": "Home Essentials affiliate publishing CMS for products and buying guides",
+  "theme": "light",
+  "screens": [
+   "overview",
    "list",
-   "about",
-   "footer"
+   "builder",
+   "settings",
+   "analytics"
   ],
-  "direction": "page-is-the-object"
+  "keep": [
+   "palette",
+   "type"
+  ],
+  "style": "framed-sheet"
  },
- "imagery": "no-product-photo",
- "allow": [],
- "direction": {
-  "id": "page-is-the-object",
-  "name": "The page is the object",
-  "sectors": [
-   "restaurant",
-   "event",
-   "hospitality",
-   "culture",
-   "music",
-   "physical-product",
-   "ecommerce",
-   "nonprofit",
-   "education",
-   "personal-portfolio",
-   "consumer-app",
-   "other"
+ "style": {
+  "id": "framed-sheet",
+  "name": "Framed sheet",
+  "theme": "light",
+  "basis": "6 screens: a developer platform overview, an analytics overview, an events analytics tab, a list detail, a reports dashboard, a flow builder",
+  "suits": [
+   "analytics",
+   "devtools",
+   "builder",
+   "smb-admin",
+   "support",
+   "commerce",
+   "report"
   ],
-  "tones": [
-   "warm",
-   "playful",
-   "editorial"
-  ],
-  "needs": [],
-  "idea": "Find the printed or physical artefact that already exists in the subject's world and build the page as that thing. A wedding site is the invitation card. A restaurant is its menu. A conference is the ticket; a record is its sleeve; a shop is the receipt or the swing tag; an archive is a stack of tabbed folders; a course is the syllabus sheet. The artefact supplies everything a template would otherwise invent: its proportions, its typographic manners, its way of grouping information. Visitors recognise the object instantly, which is why these pages feel specific.",
-  "composition": "The first screen shows the artefact as a single filled panel (paper colour on a contrasting ground) centred or offset, with believable proportions: a card at 5:7, a ticket at about 2.2:1 with a notch cut by `clip-path`, a menu as a tall sheet. All primary content lives on it, set the way that object is set: centred and symmetrical for an invitation, in tidy aligned columns for a menu or ticket. The ground behind is a flat colour or one full-bleed photograph. As the page continues, each section is another piece of the same stationery: a second card, a tear-off stub, a folded panel, always filled shapes with real edges (straight, notched, scalloped, perforated by a dotted `border` of round dots at 4px or more), never outlined boxes. The footer is the back of the object.",
-  "typography": "Take the manners of the artefact: a bookish serif with small caps avoided, or a blunt condensed face for tickets and posters. Sizes stay within what print would use relative to the panel; the name is large on the panel, details are small and exact.",
-  "typeClasses": [
-   "serif-text",
-   "serif-display",
-   "slab",
-   "condensed-heavy",
-   "grotesk-tight"
-  ],
-  "colour": "Paper and ink plus the ground the paper sits on. Two or three flat colours in total, like a two-colour print job.",
-  "paletteTags": [
-   "two-tone",
-   "earth",
-   "light-neutral"
-  ],
-  "imagery": "Optional. One photograph behind the object, or small photographs placed on it like tipped-in plates. The object itself is the image.",
-  "sectionTags": [
-   "object-led",
-   "type-led",
-   "colour-field"
-  ],
-  "motion": "curtain-footer",
-  "richness": "Recognition. The shaped edges, the print-like alignment and the limited inks make a familiar object out of plain HTML.",
-  "pitfalls": "Choose an artefact that truly belongs to the subject, or it becomes costume. Shape the edges with fills and `clip-path`; an outlined rectangle with a thin border is not an object. Keep text sizes readable on a phone, where the object becomes full width with its shaped edge kept at top and bottom.",
-  "seenIn": [
-   "opl-sarah-matt-wedding",
-   "aww-mosbys-files",
-   "opl-the-deep-end",
-   "opl-weeksync",
-   "opl-le-petit-bleu",
-   "opl-archiv"
-  ],
-  "allow": []
- },
- "hero": {
-  "id": "invitation-card-cropped",
-  "name": "Invitation card, cropped",
-  "archetype": "artefact",
-  "directions": [
-   "page-is-the-object"
-  ],
-  "needs": [],
-  "blueprint": "A flat field of one soft colour fills the viewport. Centred on it is a single portrait card in paper colour, 5:7, on columns 4–9, its top edge 190px down and its lower third cut off by the bottom of the viewport, so the page visibly continues as the rest of the card. The card is a filled shape with scalloped inner corners, made with `clip-path` or with four corner circles in the field colour, and no outline. Inside, with 56px padding, everything is centred and symmetrical like letterpress stationery. The two names, or the title, are set in a large italic serif at clamp(56px, 5.6vw, 88px) on two lines, staggered so line one sits left of centre and line two right. Between and beneath them, date, time and place appear as short lines at 15px in sentence case, separated by space and by one solid 10px diamond. The top row sits on the field above the card at 28px margins: a small monogram top-left, three text links centred, and the single action, a solid rectangular button in the ink colour, top-right.",
-  "mobile": "The card becomes full width minus 12px margins, starts 96px down and is still cropped by the bottom edge, with its scalloped top corners kept. The names stay on two lines at 12vw, centred without the stagger, and the details follow at 15px. The monogram sits top-left and the action button top-right on the field; the three links move onto the card's lower part, below the fold.",
-  "headline": "The two names or the title on two lines, up to about 12 characters per line, set as they would be printed on the card.",
-  "motion": "curtain-footer",
-  "seenIn": [
-   "opl-sarah-matt-wedding"
-  ]
- },
- "type": {
-  "id": "barlow-condensed",
-  "name": "Barlow Condensed / Barlow",
-  "class": "condensed-heavy",
-  "display": {
-   "family": "Barlow Condensed",
-   "source": "google",
-   "weights": [
-    700
+  "idea": "The app chrome is one tinted L-shaped frame; the work sits on a white sheet with a hairline edge and soft corners, so depth comes from a single tone step and no shadow.",
+  "colourBudget": "under 3%; the brand shrinks to the logo and a 2px tab underline, the data carries the chroma",
+  "tokens": {
+   "ground": "#f9fbfc",
+   "surface": "#ffffff",
+   "raised": "#f4f6f8",
+   "active": "#ebedee",
+   "border": "#e8eaec",
+   "rule": "#f0f1f2",
+   "control": "#cdced1",
+   "text": "#131416",
+   "muted": "#5d5f60",
+   "accent": "#1b6c80",
+   "positive": "#1e7b4f",
+   "negative": "#c4242a",
+   "warning": "#92400e",
+   "chart": [
+    "#1b6c80",
+    "#2f70bb",
+    "#a86f0c"
    ],
-   "italic": false,
-   "settings": "weight 700 · tracking -0.02em · leading 0.9 · uppercase for statements, mixed case for item titles",
-   "css": "<link rel=\"preconnect\" href=\"https://fonts.googleapis.com\">\n<link rel=\"preconnect\" href=\"https://fonts.gstatic.com\" crossorigin>\n<link href=\"https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700&family=Barlow:wght@400;500&display=swap\" rel=\"stylesheet\">"
+   "pills": {
+    "positive": [
+     "#dcfae5",
+     "#04250e"
+    ],
+    "negative": [
+     "#ffedea",
+     "#831c1e"
+    ],
+    "warning": [
+     "#fffbeb",
+     "#92400e"
+    ],
+    "neutral": [
+     "#ebedee",
+     "#353736"
+    ]
+   },
+   "radius": {
+    "card": 8,
+    "control": 6,
+    "sheet": 16
+   },
+   "sheetInset": 8,
+   "font": {
+    "family": "IBM Plex Sans",
+    "second": "IBM Plex Mono, for IDs and keys only",
+    "fallback": "Inter, system-ui, sans-serif",
+    "sizes": {
+     "title": 22,
+     "section": 16,
+     "kpi": 28,
+     "body": 14,
+     "small": 12
+    },
+    "weights": [
+     400,
+     500,
+     600
+    ],
+    "note": "KPI values at 400; the semibold goes on the label and the active tab."
+   },
+   "density": "medium",
+   "rowHeight": 48,
+   "sidebarWidth": 228,
+   "gap": 24,
+   "pad": 24,
+   "controlHeight": 32
   },
-  "text": {
-   "family": "Barlow",
-   "source": "google",
-   "weights": [
-    400,
-    500
-   ],
-   "italic": false,
-   "settings": "400 for body, 500 for emphasis · leading 1.5 · tracking 0",
-   "css": "<link rel=\"preconnect\" href=\"https://fonts.googleapis.com\">\n<link rel=\"preconnect\" href=\"https://fonts.gstatic.com\" crossorigin>\n<link href=\"https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700&family=Barlow:wght@400;500&display=swap\" rel=\"stylesheet\">"
-  },
-  "standsInFor": [
-   "FF DIN Condensed",
-   "Helvetica Now Display Condensed"
+  "shell": "framed-sheet",
+  "shellAlternatives": [],
+  "signature": "One tinted frame holds the sidebar and the 48px top bar with no rule between them; the page is a white sheet inset 8px from the window's right and bottom edges, with a 1px edge, 16px corners and no shadow. The active tab is a 2px underline in ink or the accent; everything else in the chrome is grey.",
+  "identity": [
+   "The frame tinted from the product's colour in place of #f9fbfc: one low-chroma step of its hue (a green-grey for a climate or farm tool, a blue-grey for an observability tool, a stone for a print shop). The sheet stays white.",
+   "The brand's own hue from the brief as --chart-1 in place of the dealt teal, on the main series and the one selected state, at 3:1 or more on white, never violet or indigo.",
+   "IBM Plex Mono for IDs, keys and the figures in tables (one job): its figures have their own drawing, and a developer reads them as the product's."
   ],
-  "note": "Road-sign condensed type with squared curves, bold but not compressed into a wall, with its normal-width sibling for text. Suits logistics, motorsport, hardware and directories with many short titles.",
-  "seenIn": [
-   "aww-julien-calot",
-   "opl-medium-rare",
-   "opl-uglycash"
+  "avoid": [
+   "a border between the sidebar and the top bar",
+   "a shadow under the sheet",
+   "cards whose border is heavier than the sheet's (#cdcfcf on cards read as heavy in the study)",
+   "a fourth nesting level: frame, sheet and card are enough",
+   "different gutters for the KPI row and the chart row (20 against 24 was flagged)"
   ],
-  "links": [
-   "https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700&family=Barlow:wght@400;500&display=swap"
-  ],
-  "scale": {
-   "step-small": "clamp(0.8125rem, 0.79rem + 0.1vw, 0.875rem)",
-   "step-body": "clamp(1.0625rem, 1rem + 0.25vw, 1.1875rem)",
-   "step-lead": "clamp(1.25rem, 1.1rem + 0.7vw, 1.625rem)",
-   "step-head": "clamp(2.5rem, 1.2rem + 5vw, 5.5rem)"
-  }
+  "notes": "The study's second data hue in this style was an orange (#e88e46) that falls inside the house terracotta range; the third chart colour here is an amber moved out of that range and darkened to 3:1 on white."
  },
- "palette": {
-  "id": "paper-grey-brass",
-  "name": "Newsprint and brass",
-  "tags": [
-   "light-neutral"
+ "shell": {
+  "id": "framed-sheet",
+  "name": "Tinted frame, white sheet",
+  "basis": "8 of 23 screens, in three variants",
+  "suits": [
+   "analytics",
+   "devtools",
+   "builder",
+   "smb-admin",
+   "support"
   ],
-  "bg": "#e8e8e3",
-  "surface": "#dcdcd6",
-  "ink": "#181715",
-  "muted": "#63625c",
-  "accent": "#bfb21a",
-  "accentInk": "#181715",
-  "fields": [
-   {
-    "bg": "#181715",
-    "ink": "#e8e8e3"
+  "numbers": {
+   "chrome": "#f6f6f6-#f9fbfc (a warm #f7f6f2 once)",
+   "sheetInset": "8px from the window's right and bottom edges (12 and 16 once each)",
+   "sheetRadius": "10-16, median 16",
+   "sheetEdge": "1px #eaeaea-#ededed, no shadow",
+   "sidebarWidth": "220-263 (228 on two screens)",
+   "topBar": "48px on the chrome ground with no rule; search 548x32 centred on the window with a shortcut hint",
+   "contentPadding": 24,
+   "floatingVariant": "both panels inset 12px with a 12px gutter, radius 10"
+  },
+  "blueprint": "Sidebar and top bar share one tinted ground with no rule between them, forming an L; the page lives on a white sheet. Variant one: the sheet butts against the sidebar and the top bar and is inset 8px from the right and bottom edges, 16px radius, 1px edge. Variant two: a flush L-frame with no inset, the frame marked by one rule. Variant three: sidebar and content are two floating panels inset 12px from every edge with a 12px gutter. The top bar, when present, is 48px and holds a centred search, the account button and a help or AI icon. Inside the sheet the content has 24px padding and starts with the breadcrumb or title row.",
+  "phone": "The frame disappears: the sheet becomes the screen, with a 48px top bar (menu button, title, one action) on the chrome tint. The search moves into the menu sheet or behind an icon."
+ },
+ "screens": [
+  {
+   "name": "overview",
+   "pattern": {
+    "id": "kpi-strip-chart-rail",
+    "name": "KPI strip, main chart and a side rail",
+    "screen": "overview",
+    "kinds": [
+     "creator",
+     "smb-admin",
+     "community",
+     "analytics"
+    ],
+    "basis": "a newsletter home; a community overview",
+    "blueprint": "Title row: a 24px noun or the product's name at 600-700, an optional 14-16px grey line under it, and the one primary action on the right, bottom-aligned with that line. 16-24px below, the scope row: section tabs and the date range in one row of 32-36px controls, or a 48px segmented track with the range select inside its right end. Then a grid of 1fr and a fixed 384px rail with a 24px gap. Main column: one KPI container split by 1px dividers into 3-5 equal cells (14px grey label, 24px value at 400-600, a 12px caption naming the baseline and window), then the main chart card, which is the largest thing on the screen, then the next card, all 16px apart. Rail: 16px headings outside their cards, 8px above each and 16px after the previous card; a recent-items list of 3-5 rows on a 45px pitch with 1px rules, closed by a 30px outlined 'View all' button instead of pagination. The rail starts level with the first card, not with the title.",
+    "phone": "The rail moves below the main column; the KPI container becomes a 2-column grid; tabs scroll inside their own row."
    }
-  ],
-  "note": "Warm paper grey with near-black type holds the upper page, then whole sections flip to near-black with paper-grey type; no section is tinted. Brass yellow marks one small detail per screen, such as the button or a single word.",
-  "seenIn": [
-   "aww-monolog"
-  ]
- },
- "photos": {
-  "set": "hands-and-making",
-  "title": "Hands and making",
-  "note": "hands at work, craft and making",
-  "treatment": null,
-  "others": [
-   "interior-and-table",
-   "field-and-farm",
-   "object-still",
-   "plants-and-flowers"
-  ],
-  "photos": [
-   {
-    "id": 304,
-    "alt": "Hand adjusting faders on an audio mixing console",
-    "tone": "mid",
-    "colours": [
-     "warm white",
-     "navy",
-     "amber"
+  },
+  {
+   "name": "list",
+   "pattern": {
+    "id": "table-filter-bar",
+    "name": "Table with tabs and a filter bar",
+    "screen": "list",
+    "kinds": [
+     "community",
+     "devtools",
+     "commerce",
+     "support",
+     "smb-admin"
     ],
-    "mono": false,
-    "calm": "none",
-    "quality": 4,
-    "ratio": 1.5,
-    "by": "Drew Patrick Miller",
-    "page": "https://unsplash.com/photos/_o6AAx9dl_Y"
-   },
-   {
-    "id": 319,
-    "alt": "Hands holding a vintage rangefinder camera against a denim jacket",
-    "tone": "mid",
-    "colours": [
-     "denim blue",
-     "mustard",
-     "silver"
-    ],
-    "mono": false,
-    "calm": "none",
-    "quality": 4,
-    "ratio": 1.97,
-    "by": "Kristian Karlsson",
-    "page": "https://unsplash.com/photos/3V6ZTpZS-ag"
-   },
-   {
-    "id": 674,
-    "alt": "Cupped hands holding a heap of dark blue grapes",
-    "tone": "mid",
-    "colours": [
-     "pale blue",
-     "dark purple",
-     "tan"
-    ],
-    "mono": false,
-    "calm": "none",
-    "quality": 4,
-    "ratio": 1.5,
-    "by": "Maja Petric",
-    "page": "https://unsplash.com/photos/vGQ49l9I4EE"
-   },
-   {
-    "id": 407,
-    "alt": "Hands lighting a sparkler that throws bright sparks in the dark",
-    "tone": "dark",
-    "colours": [
-     "charcoal",
-     "warm white",
-     "amber"
-    ],
-    "mono": false,
-    "calm": "right",
-    "quality": 4,
-    "ratio": 1.5,
-    "by": "Kelley Bozarth",
-    "page": "https://unsplash.com/photos/n6vS3xlnsCc"
-   },
-   {
-    "id": 1060,
-    "alt": "Kettle pouring water over a pour-over coffee dripper on a dark counter",
-    "tone": "dark",
-    "colours": [
-     "dark teal",
-     "black",
-     "warm brown"
-    ],
-    "mono": false,
-    "calm": "none",
-    "quality": 4,
-    "ratio": 1.5,
-    "by": "Karl Fredrickson",
-    "page": "https://unsplash.com/photos/TYIzeCiZ_60"
-   },
-   {
-    "id": 491,
-    "alt": "Axe, hammer, pliers and leather gloves laid out on dark wood",
-    "tone": "dark",
-    "colours": [
-     "dark brown",
-     "tan",
-     "steel grey"
-    ],
-    "mono": false,
-    "calm": "none",
-    "quality": 4,
-    "ratio": 1.23,
-    "by": "Todd Quackenbush",
-    "page": "https://unsplash.com/photos/IClZBVw5W5A"
-   },
-   {
-    "id": 785,
-    "alt": "Two cupped hands holding a pile of green spruce tips",
-    "tone": "mid",
-    "colours": [
-     "fresh green",
-     "dark green",
-     "warm skin"
-    ],
-    "mono": false,
-    "calm": "none",
-    "quality": 4,
-    "ratio": 1.5,
-    "by": "Jean Lakosnyk",
-    "page": "https://unsplash.com/photos/N9yFjkDc0vA"
+    "basis": "an events back office, a tracks studio, a sessions overview",
+    "blueprint": "Title row: an 18-24px title on the left, at most an outlined secondary and the one primary (36px) on the right. Underline tabs for the list's states on a full-width 1px rule with a 2px indicator as wide as the label; 22-32px below, the toolbar: a search of about 252-316 x 32-36 on the left, the count ('7 events') and the sort on the right. The table sits on the panel or page ground with no card around it: a header of 12-13px grey sentence-case labels with no fill and no rule, rows on a 48-56px pitch for one line or 72-92px with a thumbnail (media height plus 24-32px), 1px rules 3-7% darker than the ground or no rules at all, the identity column given the most width, numbers right-aligned in tabular figures with the unit muted ('5 /10'), one status mark per row and one kebab at the far right. Drop a column that is empty in every row (a blank co-host column left a 300px dead band). On an overview, cap the rows and link to the full list; on the full list, state the total and load more at the end.",
+    "phone": "Rows become two-line items: identity and the key number on line 1, the secondary fields in 13px grey on line 2, the kebab at the right. Tabs scroll in their own row; the search becomes a full-width field."
    }
-  ]
- },
- "motion": {
-  "id": "curtain-footer",
-  "name": "Curtain footer",
-  "description": "The page content slides up like a sheet to uncover the footer waiting beneath it, so the last screen is revealed rather than scrolled to. Build with a sticky footer at the bottom and a main element with its own background and a higher stacking order. No JavaScript."
- },
- "sections": [
-  {
-   "id": "showcase-square-plate-spare-text",
-   "role": "showcase",
-   "name": "Square plate, spare text",
-   "shape": "split",
-   "tags": [
-    "colour-field",
-    "photo-led"
-   ],
-   "directions": [
-    "split-stage",
-    "page-is-the-object",
-    "colour-chapters",
-    "editorial-report",
-    "one-motif",
-    "name-as-monument"
-   ],
-   "needs": [],
-   "blueprint": "One flat field split 50/50, at least 88svh tall. Left half: a single square photograph filling the half's width minus 40px margins, vertically centred, square corners. A large simple shape may be laid over it to turn the photograph into the object it stands for: a ring 86% of its width with a 6px stroke and a small solid dot at the centre makes a record; a notch cut by clip-path makes a ticket stub. Right half, a flex column with space-between: at the top a row of three plain text tabs at 18px (editions, years, variants), the active one in full ink and the others at 40%; in the middle the title, two to four words at 32–40px bold, with a 34ch description 48px below; along the bottom two filled rectangular cells side by side, each half the column wide and 72px tall, acting as the two actions, one in ink and one a tone off the field.",
-   "mobile": "The square photograph comes first at full width with 16px margins. The tabs sit under it as one row at 17px. Then the title at 28px, the description, and the two action cells stacked, each full width and 60px tall.",
-   "seenIn": [
-    "aww-paul-kalkbrenner"
-   ]
   },
   {
-   "id": "list-cards-fold-into-spines",
-   "role": "list",
-   "name": "Cards that fold into spines",
-   "shape": "pinned",
-   "tags": [
-    "type-led",
-    "colour-field",
-    "dense"
-   ],
-   "directions": [
-    "editorial-report",
-    "colour-chapters",
-    "page-is-the-object",
-    "dense-tiles"
-   ],
-   "needs": [],
-   "blueprint": "For a journal, a run of notes or a list of chapters without pictures. A wrapper about 400svh tall holds a sticky stage of 100svh. The heading, two to four words at clamp(48px, 4.2vw, 64px), sits top-left on the 32px margin, 120px from the top. Under it a band 360px tall spans the content width and holds a horizontal deck of text cards, each about 620px wide, in three neighbouring flat tones of one hue taken in turn. On a card, with 32px padding: its title at 30px on up to two lines, leading 1.1; an excerpt of two lines at 16px; and along the bottom edge the date on the left and a text link to read it on the right, both at 16px. As the page scrolls, each step slides the next card in from the right edge and squeezes the earlier ones into slivers 120px wide stacked edge to edge at the left, like book spines, where only the first letters of their titles show, clipped by the sliver. Clicking a sliver brings its card back. 48px under the band, the number of entries and a link to the full list sit at 17px on the left margin, so the stage does not end on an empty floor.",
-   "mobile": "No pin and no slivers. The cards stack at full width with 12px gaps, each in its tone, the title at 24px, the excerpt at 16px, the date and link at the foot. The heading sits above them at 10vw.",
-   "seenIn": [
-    "aww-noho"
-   ]
+   "name": "builder",
+   "pattern": null
   },
   {
-   "id": "about-founders-letter",
-   "role": "about",
-   "name": "Founder's letter",
-   "shape": "stack",
-   "tags": [
-    "quiet",
-    "type-led",
-    "object-led"
-   ],
-   "directions": [
-    "quiet-instrument",
-    "product-performs",
-    "page-is-the-object",
-    "split-stage"
-   ],
-   "needs": [],
-   "blueprint": "A letter in a centred column 520px wide with at least 160px of empty ground above and below. At the column's top-left, a round portrait 44px across. 28px below it, four or five short paragraphs at 16–17px with leading 1.55, each two to four lines and separated by one blank line, written in the first person. No heading. The sign-off is the writer's name at 22px in the text face's italic, with the role at 14px in the soft ink beneath it. One phrase in the letter may carry a flat marker-colour background. Variant for a page built as an object: the letter sits on a filled paper-colour sheet 640px wide with 60px padding on a contrasting ground, square corners, its bottom edge cut into small scallops with `clip-path`, and below a row of 5px round dots a tear-off strip 72px tall that carries the email address.",
-   "mobile": "The column takes the full width with 24px margins; text at 16px, portrait 40px. In the sheet variant the sheet spans edge to edge with 24px padding and keeps its shaped bottom edge; the tear-off strip stacks the email above a full-width button.",
-   "seenIn": [
-    "opl-mat",
-    "opl-heyclicky",
-    "opl-rafael-derolez-2026"
-   ]
+   "name": "settings",
+   "pattern": {
+    "id": "settings-two-column",
+    "name": "Settings in two columns",
+    "screen": "settings",
+    "kinds": [
+     "devtools",
+     "smb-admin",
+     "support",
+     "workspace",
+     "commerce",
+     "analytics",
+     "finance",
+     "wallet",
+     "creator",
+     "community",
+     "builder",
+     "markets",
+     "report"
+    ],
+    "basis": "one settings page; stacking from a narrow rail card. The basis is thin.",
+    "blueprint": "A centred column of about 1152px. Each section is one row: a label column of about 450px (16/500 title, 14px grey description; the title's cap top 6-8px below the panel top, level with the panel's first line) beside a panel of about 700px with a #fafafa fill, 16px radius, 16px padding, no border and no shadow. Sections are split by a full-width 1px rule with 32px above and below. Inside a panel: field labels 14/500 above 40px white inputs (1px #e8e8e8, radius 10), 8px from label to field, 16px between fields, 24px from the description to the first label, 16px to the Save button; switch rows with a 14/500 title, a 20px status badge 8px after it, a 14px grey description and a 28x16 toggle 16px from the right edge, centred on the title line. A plan-gated feature shows a 48px tinted strip with a 32px button directly above its panel, and the panel stays readable. When a panel runs much taller than its label, put the section's help or a summary of the current values in the label column rather than 250px of nothing.",
+    "phone": "Each section stacks: title and description, then the panel at full width. Inside, label, 8-10px, field, 16-26px to the next pair; toggles stay on the right of their title."
+   }
   },
   {
-   "id": "footer-contact-set-large",
-   "role": "footer",
-   "name": "Contact as the headline",
-   "shape": "statement",
-   "tags": [
-    "colour-field",
-    "type-led",
-    "poster"
-   ],
-   "directions": [
-    "colour-chapters",
-    "loud-flat-poster",
-    "type-only-statement",
-    "borrowed-category",
-    "sentence-as-layout",
-    "editorial-report",
-    "place-carries-it"
-   ],
-   "needs": [],
-   "blueprint": "A full-bleed field in one saturated palette colour, at least 90svh tall. Top row, 40px from the edge: two or three short notes at 15px in columns 1–7 (address, hours, a one-line description) and a back-to-top text link at the right margin. Then a tall empty gap. In the lower half, the way to get in touch is the display line: the telephone number or the email address itself, set at 8–9vw, flush left, hard against the margin, as one link. An email address may break once, before the @, giving two lines. Size it with `clamp()` so the longest line fills at least 80% of the width. Under it, one row of small text at 14px spread across three positions: links at the left, credits in the centre, city and year at the right. The wordmark appears only small, in the top row.",
-   "mobile": "Notes stack at the top at 15px. The contact line sits in the lower half at 12vw; a telephone number stays on one line, an email breaks before the @ and is sized so each half fits the width. The meta row becomes three stacked lines at 13px.",
-   "seenIn": [
-    "aww-era-residence",
-    "aww-coffeetech-r",
-    "opl-ohhmydesign",
-    "opl-mammut-studios",
-    "opl-belgrade-architecture"
-   ]
+   "name": "analytics",
+   "pattern": {
+    "id": "chart-pairs",
+    "name": "Per-period and running-total pairs",
+    "screen": "analytics",
+    "kinds": [
+     "community",
+     "smb-admin",
+     "analytics"
+    ],
+    "basis": "a network analytics overview",
+    "blueprint": "Title at 24-32px with one sentence under it saying what the filters do, then one filter row of 36-38px controls (one filled or near-black, the rest borderless or text, a reset link last) and 16-24px to the KPIs. KPI row: 3 equal cards in the content column (3 x 372 + 2 x 17 = 1152 in the study) or one divided container; a 16px label over the value with the change written as a phrase on the value's baseline ('+8 in the last 90 days'), grey when it is zero. Then one row per metric: the per-period column chart on the left and its cumulative line on the right, at equal width (2 x 568 + 16 = 1152) and with the same x ticks; square bars, a 2px straight line, integer ticks from zero, no legend because each chart has one series. One gap value horizontally and vertically.",
+    "phone": "Pairs stack, the cumulative chart directly under its per-period chart; KPI cards become a single column of label-value rows."
+   }
   }
- ],
- "references": [
-  {
-   "id": "aww-mosbys-files",
-   "name": "Mosby’s Files",
-   "url": "https://www.mosbyfiles.com/",
-   "source": "Awwwards Site of the Day",
-   "kind": "culture",
-   "score": 8,
-   "idea": "An archive of architects presented as a physical stack of coloured index-tab file folders that you flip through.",
-   "mood": [
-    "bold",
-    "archival",
-    "graphic",
-    "playful",
-    "scholarly"
-   ],
-   "archetype": "type-poster",
-   "hero": "Charcoal background. A slim top bar over a hairline holds the condensed wordmark dead centre and one mono link far right. The headline is one centred line of heavy condensed uppercase at 10vw, about 71% of the width, in the upper quarter. Beneath it, a three-line centred serif paragraph in mid-grey, about 42% wide. From 51% down sits a stack of file folders 86% of the viewport wide: each is a flat colour band with one to three trapezoid tabs rising from its top-left edge, each tab a different colour holding a serif name. Mono category labels sit right-aligned. The front red folder is open, running off the bottom.",
-   "type": "Founders Grotesk bold condensed uppercase at 144px for the title and wordmark; Signifier serif at about 22px for the intro and 28px for tab names; IBM Plex Mono 12px for labels and body. Three unrelated faces, each with one job, and a twelve-to-one size jump.",
-   "colour": "#191919 #d71e1e #1e4bd7 #0c7866 #581e70 #ffe927 — Charcoal ground with five flat poster primaries assigned to folders and tabs; each tab deliberately differs from the folder behind it. No tints, gradients or photos; white type except black on yellow.",
-   "imagery": "No photographs on the index. The folder shapes are the imagery, plus a row of seven small white line-drawn north-arrow and compass symbols and a drawing scale bar borrowed from architectural plans.",
-   "layout": "Centred title block over an 86%-wide folder stack with equal dark margins. Folders overlap at a fixed 60px step so only the tab rows show; the open folder expands into a tall single-colour panel with mono text top-left and plan symbols near the bottom. Under two screens.",
-   "sections": [
-    {
-     "role": "work",
-     "description": "Four full-width colour bands stacked with a 60px reveal, each with trapezoid tabs growing from its top-left edge. Tabs are about 44px tall with S-curved shoulders, sit side by side with small gaps, and each takes a contrasting flat colour: yellow and black tabs on a green folder, red and blue on purple. Names are white serif at 28px inside the tabs. A mono category label with a small chevron is right-aligned in each band's visible strip."
-    },
-    {
-     "role": "other",
-     "description": "The front folder opens into a solid red panel nearly two viewports tall. Top-right: its mono category label with a down chevron. Top-left, inset about 60px: a four-line mono paragraph in white, at most half the panel wide. The middle is left empty. Near the bottom, a centred row of seven small white plan symbols evenly spaced; beneath, a baseline row with a drawing scale bar left, year centre, credit and round logo right."
-    }
-   ],
-   "steal": [
-    "Build navigation as stacked full-width colour bands with trapezoid tabs, each tab coloured to clash with the folder behind it.",
-    "Pair a heavy condensed grotesk title with a bookish serif for names and a mono for metadata, giving each face exactly one role.",
-    "Borrow notation from the subject's own documents (scale bars, north arrows) as footer ornament instead of generic icons."
-   ],
-   "media": "The hero has no picture: its visual weight is a CSS stack of overlapping flat colour folders with sloped tabs covering the lower half of the fold (about 42% of the area), which doubles as the index; an open folder expands to 80vh as the content panel. The only drawings are seven small white plan symbols and a scale bar; no photographs or video on the index.",
-   "motion": "A short entrance: readable at about 1.2s, with 17 title letter spans already in place, and settled by 2.5s as the stack rises about 13px into place and the subline fades up. Lenis on a page only 1.6 screens tall; the header slides away on scroll, and folders and tabs move on one house curve, cubic-bezier(.33,1,.68,1), at 0.65s, with the quicker moves at exactly half that, 0.325s."
-  },
-  {
-   "id": "opl-le-petit-bleu",
-   "name": "Le Petit Bleu",
-   "url": "https://www.lepetitbleucafe.com/",
-   "source": "One Page Love",
-   "kind": "restaurant",
-   "score": 7.8,
-   "idea": "The cafe's teal-and-white stripes become the whole system: one teal ink on cream, everything boxed in thin double outlines like printed menu cards, beside a permanently visible photo of the room.",
-   "mood": [
-    "cheerful",
-    "charming",
-    "retro",
-    "tidy",
-    "sunny"
-   ],
-   "archetype": "split-text-media",
-   "hero": "Viewport split 50/50 with 12px gaps. Left: a cream panel with a thin pale-teal outline and rounded corners. Inside, a second outlined box is the nav bar: two-line hamburger left, teal brush-script logo about 300px wide centred, a caps order link right. Below, a two-line light serif headline at about 3.5vw, centred, in teal, then two centred stacks, each a bold caps label, a serif line and a solid teal button wrapped in a second thin outline. Right: a full-height rounded photo of a striped booth, with an outlined hours bar across its top, three slide dots bottom-left and a white address card bottom-right.",
-   "type": "Self Modern, a light bookish serif, for headline and 15px body; Matter SQ bold caps for labels and buttons; Archive Mono Pro typewriter caps for menu rows; a brush-script logo. Section titles are tall condensed serif caps sized so four to seven letters fill the column.",
-   "colour": "#fcfbf7 #13a7b2 #058599 #cfe5e7 #e9b81f — Cream paper and a single teal used for every word, rule, outline and button; no black anywhere. Yellow, floral reds and marble enter only through the interior photographs.",
-   "imagery": "Bright, saturated interior and food photographs; the right-hand panel is a full-height slideshow with rounded corners. Small food shots sit in a horizontal strip, and a fine line drawing of the shopfront with one teal awning fills a card.",
-   "layout": "The left half scrolls as a stack of outlined cream cards (full-width or two-up) with 12px gaps while the right half stays fixed. Card contents are centred. A sticky nav card rides over the stack. On mobile the photo becomes the hero card's background.",
-   "sections": [
-    {
-     "role": "list",
-     "description": "A card containing only the section word in tall condensed serif caps, teal, sized so its four letters fill the column edge to edge. Below it, a stack of full-width outlined rows about 36px high, each with a category name in typewriter mono caps at left and a thin plus sign at right, separated by 6px gaps. Above the title: a ticker row of tiny caps and a strip of four small food photos with rounded corners."
-    },
-    {
-     "role": "about",
-     "description": "The same giant condensed title treatment, then centred serif paragraphs in teal with underlined links in a narrow measure of about 280px. Further down, a landscape photo of the two proprietors with a centred two-line caption in tiny sans, followed by more centred paragraphs. All of it lives in the left half while the right photo panel has advanced to a shelf-wall image."
-    },
-    {
-     "role": "gallery",
-     "description": "A header row with a tiny bold caps label at left and a script follow-us link with arrow at right, then three portrait images (about 3:5) with 12px rounded corners in a row, the third cropped by the column edge to imply a carousel. Directly below, the next giant section title begins and is cropped by the viewport."
-    }
-   ],
-   "steal": [
-    "Print everything in one brand ink on cream, including body text, rules and buttons, and let photographs supply the other colours.",
-    "Wrap buttons and panels in a second thin outline offset by a few pixels to get a printed-ticket feel.",
-    "Keep a tall photo panel fixed on one half and scroll a stack of cards on the other, swapping the photo as sections change."
-   ]
-  },
-  {
-   "id": "aww-aardvark-book-club",
-   "name": "Aardvark Book Club",
-   "url": "https://aardvarkbookclub.com",
-   "source": "Awwwards Site of the Day",
-   "kind": "ecommerce",
-   "score": 7.7,
-   "idea": "A book club dressed as a sweet shop: fat black type, tumbling 3D books and boxes on wavy colour fields, annotated with handwritten asides.",
-   "mood": [
-    "playful",
-    "loud",
-    "bookish",
-    "warm"
-   ],
-   "archetype": "split-text-media",
-   "hero": "A saturated yellow field with two large wavy blobs, pale yellow then orange, rising from the bottom. A three-line headline in Champ Bold, black, at about 8.3vw with leading under 0.85, is flush to a 15px left margin and reaches 60% across. Beneath it: a four-line paragraph 310px wide and a magenta split button (label plus arrow square). Right of centre a 3D hardback in navy and pink tilts 20 degrees, 600px tall; another book is cropped by the top-left corner, a third by the bottom edge. A purple handwritten note sits rotated at far right. Nav: pale-yellow pill links centred, an orange login button, black round social icons.",
-   "type": "Champ Bold, an ultra-heavy wide sans with a looped g, for headings at 120px with tight tracking and leading; Degular for 18px body and pill labels; a purple handwritten script (Hello Organichand) for rotated margin notes and step labels. Three distinct voices.",
-   "colour": "#ffd249 #faed8f #f9a21f #ffdbfd #a4f6f8 #fd48f2 — Each section owns one flat candy colour: yellow hero, white shelf, pink steps, cyan unboxing, deep violet footer. Type stays black; buttons are magenta.",
-   "imagery": "3D-rendered hardbacks and a patterned shipping box, cut out and tilted, floating over flat wavy vector shapes; real book covers on tilted coloured cards; black line drawings of figures on step cards. Nothing sits square to the grid.",
-   "layout": "Sections are full-width panels with roughly 80px corner radius inset about 20px from the viewport, each a different colour. Headings alternate left and centre; cards overlap and rotate a few degrees; handwritten notes are tucked beside headings at an angle.",
-   "sections": [
-    {
-     "role": "showcase",
-     "description": "White band. A centred black heading at 5.5vw over a two-line subline, with a rotated handwritten note at its upper left. Below, a horizontal row of book covers, each on a rounded colour-matched card with a small tag pill at top-left; cards tilt alternately by 3 degrees at staggered heights, the last cropped by the right edge, with two round arrow buttons above at right. Later, covers give way to same-coloured info cards with genre pills, heavy title and blurb."
-    },
-    {
-     "role": "how-it-works",
-     "description": "A pale-pink rounded panel with lighter wavy shapes inside. Heavy black heading at left with a handwritten aside beside it; a small round logo stamp and a magenta split button at right. Along the bottom, four portrait cards about 250px wide in cyan, magenta, yellow and violet overlap like a fanned hand, each rotated a few degrees, with a handwritten step label at top, a black line drawing in the middle and a heavy caption at the foot."
-    },
-    {
-     "role": "other",
-     "description": "A full-viewport cyan rounded panel containing only a 3D shipping box wrapped in a wavy magenta, violet and black pattern, centred. Across the scroll it goes from closed and tilted to lid open, growing to about 57% of the viewport width, with a single handwritten note at its right. No heading and no button."
-    },
-    {
-     "role": "footer",
-     "description": "The preceding white section ends in large rounded bottom corners over a deep violet footer. Left: white logo, two store badges, two magenta round social icons. Centre: the patterned box again, cropped by the bottom edge. Right: a small heavy heading, a white rounded email field and a magenta split button. A black legal strip closes the page."
-    }
-   ],
-   "steal": [
-    "Give each section one flat saturated colour inside a large-radius inset panel and keep the type black across all of them.",
-    "Add rotated handwritten margin notes beside headings to carry secondary facts in a second voice.",
-    "Fan step cards so they overlap and tilt instead of sitting in an even grid."
-   ],
-   "media": "About 60% of the first screen is picture: a 3D book and cropped book corners over a full-bleed illustrated wave field. Below come a sticky image-sequence of a box opening inside a rounded panel, a slider of tilted cards bleeding off the right edge, covers fanned like a hand of cards, a sticker collage round a circular badge and a cut-out box rising out of the footer: 37 images and two scroll-scrubbed canvases, no video.",
-   "motion": "An indigo transition panel wipes away by 1.2s while the headline arrives word by word (515 split characters), and Lenis then drives the scrubbed scenes: the hero book turns through an image sequence, a sticky stage scrubs the box opening over 2745px, a headline slides along a curved path at scrub 0.5, and the footer is uncovered from under the rounded page. Buttons squash to 0.955 by 0.925 in 0.15s on press, the main ease is cubic-bezier(0.32,0.72,0,1), and the bounce overshoots are ones the house motion layer does not use, though the site ships 32 reduced-motion rules."
-  }
- ],
- "scenes": []
+ ]
 }
