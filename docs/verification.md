@@ -6,7 +6,7 @@ Verified on November 8, 2026 with Node.js 24.21.0 and npm 11.18.0.
 
 | Check | Result |
 | --- | --- |
-| `npm run test` | Passed: 14 test files, 91 tests |
+| `npm run test` | Passed: 17 test files, 102 tests |
 | `npm run lint` | Passed with zero warnings |
 | `npm run typecheck` | Passed |
 | `npm run build` | Passed with Next.js 16.3.4 |
@@ -28,12 +28,15 @@ The development server was tested at `http://127.0.0.1:3000`.
 - Reviewed the public homepage and product empty state at desktop and mobile widths.
 - Reviewed a temporary populated product-card fixture at desktop and mobile widths, then removed the fixture so the production database remains truthful and empty.
 - Checked responsive navigation, visible disclosures, focus styles, reduced-motion handling, disabled affiliate action, empty states, and administrator loading/error/success states.
+- Reviewed the authenticated Quick Add page at desktop and 390-pixel mobile widths against the hosted Supabase project.
+- Confirmed the six essential controls, exact accessible labels, keyboard focus, unsaved state, responsive action layout, pending controls, valid ASIN/tracking-ID feedback, error summary, field messages, and retention of entered values after server validation.
+- Submitted only an intentionally incomplete publish attempt to exercise the no-write validation path. No temporary product record was created or deleted.
 
-## Not verified without owner accounts
+## Remaining verification boundaries
 
-- Hosted Supabase authentication, CRUD operations, RLS behavior, and the optional pgTAP policy suite require a real Supabase project and were not executed against a live database.
-- Vercel deployment requires the owner's Vercel account, final domain, and environment values; no deployment was performed.
-- No real Amazon products or links were added. Product information must be verified and entered by the owner after the Associates account and tracking ID are ready.
+- Hosted Supabase authentication and the protected new-product page were verified with the owner's configured account. A successful insert/delete cycle and the optional pgTAP policy suite were not repeated during this UI-only release.
+- The owner has a configured Vercel deployment. Public production routes are checked after each push; the authenticated production admin UI still requires the owner's browser session.
+- No real Amazon product was added. Product information must be verified and entered by the owner using an exact Associates link.
 - Amazon catalog API price automation is not connected, so public prices remain hidden.
 
 Docker was not installed, started, or used for this workflow.
