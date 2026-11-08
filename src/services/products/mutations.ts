@@ -5,7 +5,7 @@ import { redirect } from "next/navigation";
 
 import { validateAmazonUrl } from "@/lib/affiliate/url";
 import { can } from "@/lib/auth/permissions";
-import { requireStaff } from "@/lib/auth/require-role";
+import { requireStaff, type StaffSession } from "@/lib/auth/require-role";
 import { createServerSupabaseClient } from "@/lib/supabase/server";
 import {
   productDraftSchema,
@@ -14,6 +14,7 @@ import {
 } from "@/lib/validation/product";
 import type { ProductActionState } from "@/services/products/action-state";
 import { productFormDataToInput } from "@/services/products/form-data";
+import { quickProductFormDataToInput } from "@/services/products/quick-add";
 import { fetchProductEditorRecord } from "@/services/products/repository";
 import {
   canDeleteProduct,
@@ -53,8 +54,43 @@ export async function createProductAction(
     );
   }
 
+  return createProductRecord(session, parsed.data, intent);
+}
+
+export async function createQuickProductAction(
+  previousState: ProductActionState,
+  formData: FormData,
+): Promise<ProductActionState> {
+  void previousState;
+  const session = await requireStaff();
+  const input = quickProductFormDataToInput(formData);
+  const intent = getIntent(formData);
+  const parsed = parseProductInput(input, intent);
+  if (!parsed.success) {
+    return quickValidationFailure(parsed.error.flatten().fieldErrors);
+  }
+
+  if (
+    parsed.data.affiliateUrl &&
+    !can(session.profile.role, "affiliateLinks.manage")
+  ) {
+    return fieldFailure(
+      "affiliateUrl",
+      "Only an administrator can add or verify affiliate links.",
+    );
+  }
+
+  return createProductRecord(session, parsed.data, intent);
+}
+
+async function createProductRecord(
+  session: StaffSession,
+  input: ProductDraftInput,
+  intent: ReturnType<typeof getIntent>,
+): Promise<ProductActionState> {
+
   const supabase = await createServerSupabaseClient();
-  const values = productInputToValues(parsed.data, session.user.id);
+  const values = productInputToValues(input, session.user.id);
   const { data: product, error } = await supabase
     .from("products")
     .insert({ ...values, status: "draft" })
@@ -65,7 +101,7 @@ export async function createProductAction(
 
   const affiliateError = await saveAffiliateLink(
     product.id,
-    parsed.data,
+    input,
     session.profile.role,
   );
   if (affiliateError) {
@@ -92,7 +128,7 @@ export async function createProductAction(
     }
   }
 
-  revalidateProductPaths(product.id, parsed.data.slug ?? "");
+  revalidateProductPaths(product.id, input.slug ?? "");
   redirect(`/admin/products/${product.id}/edit?saved=1`);
 }
 
@@ -286,6 +322,30 @@ function validationFailure(
       ),
     ),
   };
+}
+
+function quickValidationFailure(
+  fieldErrors: Record<string, string[] | undefined>,
+): ProductActionState {
+  const visibleFields: Record<string, string[]> = {};
+  const collect = (target: string, sources: string[]) => {
+    const messages = sources.flatMap((source) => fieldErrors[source] ?? []);
+    if (messages.length > 0) visibleFields[target] = [...new Set(messages)];
+  };
+
+  collect("name", ["name", "slug"]);
+  collect("categoryId", ["categoryId"]);
+  collect("recommendation", [
+    "recommendation",
+    "shortDescription",
+    "description",
+    "seoDescription",
+  ]);
+  collect("mainImageUrl", ["mainImageUrl", "mainImageAlt"]);
+  collect("affiliateUrl", ["affiliateUrl", "asin"]);
+  collect("affiliateConfirmed", ["affiliateConfirmed"]);
+
+  return validationFailure(visibleFields);
 }
 
 function fieldFailure(field: string, message: string): ProductActionState {
