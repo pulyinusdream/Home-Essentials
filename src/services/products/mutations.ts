@@ -88,7 +88,6 @@ async function createProductRecord(
   input: ProductDraftInput,
   intent: ReturnType<typeof getIntent>,
 ): Promise<ProductActionState> {
-
   const supabase = await createServerSupabaseClient();
   const values = productInputToValues(input, session.user.id);
   const { data: product, error } = await supabase

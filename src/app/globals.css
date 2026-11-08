@@ -445,7 +445,7 @@ button, input, select, textarea { font: inherit; }
 .quick-product-price-note svg { width: 18px; flex: none; color: var(--gold); }
 .quick-product-actions { min-height: 72px; padding: 14px 0; display: flex; align-items: center; justify-content: space-between; gap: 18px; border-top: 1px solid var(--border); }
 .quick-product-actions > div { display: flex; align-items: center; gap: 10px; }
-.quick-product-actions .editor-button { min-width: 132px; }
+.quick-product-actions .editor-button { min-width: 132px; min-height: 44px; }
 .quick-product-actions .editor-button--primary { min-width: 156px; }
 .quick-product-actions .editor-button:disabled { cursor: not-allowed; }
 
