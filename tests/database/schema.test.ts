@@ -79,6 +79,19 @@ describe("Supabase database contract", () => {
     expect(mediaPolicy).not.toContain("editor");
   });
 
+  it("allows editors to inspect but not mutate affiliate links", () => {
+    const readPolicy = policies.match(
+      /create policy affiliate_links_staff_read[\s\S]*?;/,
+    )?.[0];
+    const writePolicy = policies.match(
+      /create policy affiliate_links_admin_all[\s\S]*?;/,
+    )?.[0];
+
+    expect(readPolicy).toContain("array['admin', 'editor']");
+    expect(writePolicy).toContain("private.has_role(array['admin'])");
+    expect(writePolicy).not.toContain("editor");
+  });
+
   it("installs update, audit, and publication-readiness safeguards", () => {
     expect(functions).toContain("create or replace function public.set_updated_at");
     expect(functions).toContain("create or replace function private.audit_content_change");

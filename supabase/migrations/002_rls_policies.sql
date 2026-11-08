@@ -207,11 +207,17 @@ to authenticated
 using (private.has_role(array['admin']))
 with check (private.has_role(array['admin']));
 
-create policy affiliate_links_staff_all
-on public.affiliate_links for all
+create policy affiliate_links_staff_read
+on public.affiliate_links for select
 to authenticated
 using (private.has_role(array['admin', 'editor']))
-with check (private.has_role(array['admin', 'editor']));
+;
+
+create policy affiliate_links_admin_all
+on public.affiliate_links for all
+to authenticated
+using (private.has_role(array['admin']))
+with check (private.has_role(array['admin']));
 
 create policy product_clicks_staff_read
 on public.product_clicks for select
