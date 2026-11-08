@@ -1,6 +1,6 @@
 // @vitest-environment jsdom
 
-import { cleanup, render, screen } from "@testing-library/react";
+import { cleanup, fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { afterEach, describe, expect, it, vi } from "vitest";
 
 vi.mock("@/services/products/mutations", () => ({
@@ -8,6 +8,7 @@ vi.mock("@/services/products/mutations", () => ({
 }));
 
 import { QuickProductEditor } from "@/components/products/quick-product-editor";
+import { createQuickProductAction } from "@/services/products/mutations";
 
 const categories = [
   {
@@ -17,7 +18,10 @@ const categories = [
   },
 ];
 
-afterEach(cleanup);
+afterEach(() => {
+  cleanup();
+  vi.clearAllMocks();
+});
 
 describe("QuickProductEditor", () => {
   it("shows only the essential product fields to an administrator", () => {
@@ -55,5 +59,31 @@ describe("QuickProductEditor", () => {
       (screen.getByRole("button", { name: "Save draft" }) as HTMLButtonElement)
         .disabled,
     ).toBe(false);
+  });
+
+  it("keeps entered values when server validation returns an error", async () => {
+    vi.mocked(createQuickProductAction).mockResolvedValueOnce({
+      status: "error",
+      message: "Review the highlighted sections before saving.",
+      fieldErrors: {
+        recommendation: ["Add an editorial recommendation before publishing."],
+      },
+    });
+    render(<QuickProductEditor categories={categories} role="admin" />);
+
+    const name = screen.getByLabelText("Product name") as HTMLInputElement;
+    const recommendation = screen.getByLabelText(
+      "Short recommendation",
+    ) as HTMLTextAreaElement;
+    fireEvent.change(name, { target: { value: "Accessible overbed table" } });
+    fireEvent.change(recommendation, {
+      target: { value: "Useful beside a bed or couch." },
+    });
+    fireEvent.click(screen.getByRole("button", { name: "Publish product" }));
+
+    await waitFor(() => expect(createQuickProductAction).toHaveBeenCalledOnce());
+    await waitFor(() => expect(screen.getByRole("alert")).toBeTruthy());
+    expect(name.value).toBe("Accessible overbed table");
+    expect(recommendation.value).toBe("Useful beside a bed or couch.");
   });
 });

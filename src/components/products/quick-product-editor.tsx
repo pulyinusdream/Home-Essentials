@@ -24,6 +24,24 @@ import {
 import { createQuickProductAction } from "@/services/products/mutations";
 import type { CategoryRow, StaffRole } from "@/types/database.types";
 
+type QuickProductValues = {
+  name: string;
+  categoryId: string;
+  recommendation: string;
+  mainImageUrl: string;
+  affiliateUrl: string;
+  affiliateConfirmed: boolean;
+};
+
+const emptyQuickProductValues: QuickProductValues = {
+  name: "",
+  categoryId: "",
+  recommendation: "",
+  mainImageUrl: "",
+  affiliateUrl: "",
+  affiliateConfirmed: false,
+};
+
 export function QuickProductEditor({
   categories,
   role,
@@ -37,6 +55,7 @@ export function QuickProductEditor({
     FormData
   >(createQuickProductAction, initialProductActionState);
   const [dirty, setDirty] = useState(false);
+  const [values, setValues] = useState<QuickProductValues>(emptyQuickProductValues);
   const [localErrors, setLocalErrors] = useState<Record<string, string>>({});
   const [affiliateFeedback, setAffiliateFeedback] = useState<string | null>(null);
   const canManageAffiliate = role === "admin";
@@ -151,6 +170,11 @@ export function QuickProductEditor({
               maxLength={240}
               placeholder="Vaunn Adjustable Overbed Table"
               required
+              value={values.name}
+              onChange={(event) => setValues((current) => ({
+                ...current,
+                name: event.target.value,
+              }))}
             />
           </QuickField>
 
@@ -160,7 +184,15 @@ export function QuickProductEditor({
             error={firstError(fieldErrors, "categoryId")}
             publishRequired
           >
-            <select id="quick-field-categoryId" name="categoryId" defaultValue="">
+            <select
+              id="quick-field-categoryId"
+              name="categoryId"
+              value={values.categoryId}
+              onChange={(event) => setValues((current) => ({
+                ...current,
+                categoryId: event.target.value,
+              }))}
+            >
               <option value="">Choose a category</option>
               {categories.map((category) => (
                 <option key={category.id} value={category.id}>{category.name}</option>
@@ -182,6 +214,11 @@ export function QuickProductEditor({
             rows={5}
             maxLength={5_000}
             placeholder="A practical choice for…"
+            value={values.recommendation}
+            onChange={(event) => setValues((current) => ({
+              ...current,
+              recommendation: event.target.value,
+            }))}
           />
         </QuickField>
 
@@ -198,6 +235,11 @@ export function QuickProductEditor({
             type="url"
             inputMode="url"
             placeholder="https://…"
+            value={values.mainImageUrl}
+            onChange={(event) => setValues((current) => ({
+              ...current,
+              mainImageUrl: event.target.value,
+            }))}
           />
         </QuickField>
 
@@ -225,6 +267,11 @@ export function QuickProductEditor({
                   type="url"
                   inputMode="url"
                   placeholder="https://www.amazon.com/dp/…?tag=…"
+                  value={values.affiliateUrl}
+                  onChange={(event) => setValues((current) => ({
+                    ...current,
+                    affiliateUrl: event.target.value,
+                  }))}
                 />
               </QuickField>
               {affiliateFeedback ? (
@@ -234,7 +281,15 @@ export function QuickProductEditor({
                 </p>
               ) : null}
               <label className="confirmation-check" id="quick-field-affiliateConfirmed">
-                <input type="checkbox" name="affiliateConfirmed" />
+                <input
+                  type="checkbox"
+                  name="affiliateConfirmed"
+                  checked={values.affiliateConfirmed}
+                  onChange={(event) => setValues((current) => ({
+                    ...current,
+                    affiliateConfirmed: event.target.checked,
+                  }))}
+                />
                 <span>I generated and checked this link in Amazon Associates.</span>
               </label>
               <FieldError message={firstError(fieldErrors, "affiliateConfirmed")} />
