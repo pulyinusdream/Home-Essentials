@@ -1,5 +1,13 @@
 import { renderToStaticMarkup } from "react-dom/server";
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
+
+vi.mock("next/font/google", () => ({
+  Hanken_Grotesk: () => ({
+    className: "public-font-test",
+    style: { fontFamily: "Hanken Grotesk" },
+    variable: "public-font-variable-test",
+  }),
+}));
 
 import HomePage from "../src/app/page";
 import { metadata } from "../src/app/layout";
@@ -31,7 +39,8 @@ describe("application shell", () => {
     const homePage = await HomePage();
     const html = renderToStaticMarkup(homePage);
 
-    expect(html).toContain("Make Your Home Feel More Like Home.");
+    expect(html).toContain("Better finds for");
+    expect(html).toContain("everyday homes");
     expect(html).toContain(
       "As an Amazon Associate I earn from qualifying purchases.",
     );

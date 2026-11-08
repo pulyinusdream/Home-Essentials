@@ -46,8 +46,8 @@ The original dealt type and palette were redrawn because the playful Pilcrow Rou
 - Product grids use four columns on wide screens, three on medium screens, two on small tablets, and one on narrow phones.
 - Product media uses a compact square neutral field with `contain` sizing so owner-supplied product cutouts remain fully visible.
 - Product names use approximately 20 px type, supporting copy uses 14–15 px, and descriptions clamp to two lines.
-- Keep the real compliant price behavior; when price is intentionally absent, show “See on Amazon”.
-- Use one small ArrowUpRight icon for the detail affordance. Do not add ratings, reviews, prices, discounts, or stock data.
+- Keep the real compliant price behavior; when price is intentionally absent, show “View recommendation”.
+- Use one small ArrowRight icon for the internal detail affordance. Reserve external-link language for the real Amazon action on the product page. Do not add ratings, reviews, prices, discounts, or stock data.
 - Category images use a shorter landscape ratio. Guide cards follow the same quiet metadata and typography system.
 - Search, category filtering, empty states, and result counts retain their current behavior.
 

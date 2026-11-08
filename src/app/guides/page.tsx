@@ -21,8 +21,7 @@ export default async function GuidesPage() {
   return (
     <PublicShell>
       <header className="public-page-hero page-width">
-        <p className="eyebrow">Ideas worth saving</p>
-        <h1>Practical guidance before the product link.</h1>
+        <h1>Useful guides for better choices</h1>
         <p>
           Start with a household question, understand the tradeoffs, and then
           explore recommendations that fit the need.

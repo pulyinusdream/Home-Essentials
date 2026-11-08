@@ -1,0 +1,826 @@
+/* Public publication only. Admin routes keep the legacy tokens in globals.css. */
+.public-site {
+  --public-bg: #e5e1d8;
+  --public-surface: #dad5ca;
+  --public-ink: #2a1d17;
+  --public-muted: #6b5b51;
+  --public-accent: #456f3a;
+  --public-accent-ink: #ffffff;
+  --public-focus: #456f3a;
+  --public-rule: #c8c1b5;
+  --public-margin: clamp(1rem, 2.2vw, 2rem);
+  --public-gutter: clamp(0.75rem, 1.4vw, 1.5rem);
+  --public-small: clamp(0.8125rem, 0.79rem + 0.1vw, 0.875rem);
+  --public-body: clamp(1rem, 0.96rem + 0.18vw, 1.125rem);
+  --public-lead: clamp(1.125rem, 1.02rem + 0.42vw, 1.375rem);
+  --public-heading: clamp(2.25rem, 1.72rem + 2.2vw, 3.75rem);
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-soft: cubic-bezier(0.33, 1, 0.68, 1);
+  --charcoal: var(--public-ink);
+  --cream: var(--public-bg);
+  --white: var(--public-accent-ink);
+  --gold: var(--public-accent);
+  --gold-soft: var(--public-surface);
+  --muted: var(--public-muted);
+  --border: var(--public-rule);
+  --raised: var(--public-surface);
+  min-height: 100svh;
+  background: var(--public-bg);
+  color: var(--public-ink);
+  font-family: var(--font-public), "Segoe UI", sans-serif;
+  font-size: var(--public-body);
+  letter-spacing: -0.005em;
+}
+
+.public-site main {
+  overflow: clip;
+  background: var(--public-bg);
+}
+
+.public-site ::selection {
+  background: var(--public-accent);
+  color: var(--public-accent-ink);
+}
+
+.public-site :focus-visible {
+  outline: 2px solid var(--public-focus);
+  outline-offset: 3px;
+}
+
+.public-site .page-width,
+.public-site .public-header__inner {
+  width: min(1504px, calc(100% - (var(--public-margin) * 2)));
+  margin-inline: auto;
+}
+
+.public-site .public-header {
+  position: relative;
+  z-index: 20;
+  border: 0;
+  background: var(--public-bg);
+}
+
+.public-site .public-header__inner {
+  min-height: 72px;
+}
+
+.public-site .brand {
+  gap: 10px;
+}
+
+.public-site .brand__mark {
+  width: 34px;
+  height: 34px;
+  border: 0;
+  background: var(--public-accent);
+  color: var(--public-accent-ink);
+  font: 500 12px/1 var(--font-public), "Segoe UI", sans-serif;
+  letter-spacing: 0.04em;
+}
+
+.public-site .brand__name {
+  font: 500 17px/1.1 var(--font-public), "Segoe UI", sans-serif;
+  letter-spacing: -0.02em;
+}
+
+.public-site .public-nav {
+  gap: clamp(20px, 2.1vw, 34px);
+  font-size: 15px;
+}
+
+.public-site .public-nav a,
+.public-site .public-footer a,
+.public-site .text-link {
+  text-decoration-line: underline;
+  text-decoration-color: transparent;
+  text-decoration-thickness: 0.07em;
+  text-underline-offset: 0.2em;
+  transition: color 180ms ease, text-decoration-color 180ms ease;
+}
+
+.public-site .icon-link {
+  color: var(--public-ink);
+  transition: background-color 180ms ease;
+}
+
+.public-site .mobile-menu__panel {
+  top: 48px;
+  padding: 12px;
+  border: 0;
+  background: var(--public-surface);
+  box-shadow: none;
+}
+
+.public-site .mobile-menu__panel a {
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+}
+
+.public-site .hero {
+  min-height: 640px;
+  display: grid;
+  grid-template-columns: minmax(0, 0.84fr) minmax(440px, 1.16fr);
+  gap: var(--public-gutter);
+  align-items: stretch;
+  border: 0;
+}
+
+.public-site .hero__copy {
+  align-self: center;
+  padding: clamp(64px, 8vw, 112px) clamp(28px, 5vw, 80px) clamp(64px, 8vw, 112px) 0;
+}
+
+.public-site .hero h1 {
+  max-width: none;
+  margin: 0 0 0 -0.04em;
+  font: 500 clamp(3.25rem, 5.2vw, 5rem) / 0.92 var(--font-public), "Segoe UI", sans-serif;
+  letter-spacing: -0.05em;
+  text-wrap: balance;
+}
+
+.public-site .hero h1 span {
+  display: block;
+  white-space: nowrap;
+}
+
+.public-site .hero__copy > p {
+  max-width: 34ch;
+  margin: 30px 0 0;
+  color: var(--public-muted);
+  font-size: var(--public-lead);
+  line-height: 1.42;
+  text-wrap: pretty;
+}
+
+.public-site .hero__actions {
+  margin-top: 34px;
+  gap: 22px;
+}
+
+.public-site .button {
+  min-height: 48px;
+  padding-inline: 22px;
+  font-weight: 500;
+  transition: transform 140ms var(--ease-out), background-color 180ms ease;
+}
+
+.public-site .button:active {
+  transform: scale(0.98);
+}
+
+.public-site .button--primary {
+  background: var(--public-accent);
+  color: var(--public-accent-ink);
+}
+
+.public-site .text-link {
+  font-weight: 500;
+}
+
+.public-site .hero-room-gallery {
+  position: relative;
+  min-height: 620px;
+  margin: 0;
+  overflow: clip;
+  background: var(--public-surface);
+}
+
+.public-site .hero-room-gallery__frames {
+  position: absolute;
+  inset: 0;
+}
+
+.public-site .hero-room-gallery__frame {
+  object-fit: cover;
+  opacity: 0;
+}
+
+.public-site .hero-room-gallery__frame:first-child {
+  opacity: 1;
+}
+
+.public-site .hero-room-gallery figcaption {
+  position: absolute;
+  z-index: 2;
+  right: 18px;
+  bottom: 18px;
+  max-width: 16rem;
+  margin: 0;
+  padding: 9px 11px;
+  background: var(--public-bg);
+  color: var(--public-ink);
+  font-size: var(--public-small);
+  line-height: 1.35;
+}
+
+.public-site .category-section,
+.public-site .finds-section,
+.public-site .guides-section {
+  padding-block: clamp(76px, 8vw, 112px);
+  border: 0;
+}
+
+.public-site .category-section,
+.public-site .guides-section {
+  background: var(--public-surface);
+}
+
+.public-site .finds-section {
+  background: var(--public-bg);
+}
+
+.public-site .section-heading {
+  margin-bottom: clamp(32px, 4vw, 48px);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 20px var(--public-gutter);
+  align-items: end;
+}
+
+.public-site .section-heading h2 {
+  max-width: 16ch;
+  margin: 0 0 0 -0.035em;
+  font: 500 var(--public-heading) / 0.98 var(--font-public), "Segoe UI", sans-serif;
+  letter-spacing: -0.045em;
+  text-wrap: balance;
+}
+
+.public-site .section-heading--editorial {
+  grid-template-columns: minmax(0, 7fr) minmax(280px, 5fr);
+}
+
+.public-site .section-heading--editorial > p {
+  max-width: 40ch;
+  margin: 0;
+  justify-self: end;
+  color: var(--public-muted);
+  line-height: 1.5;
+}
+
+.public-site .category-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 38px var(--public-gutter);
+}
+
+.public-site .category-card {
+  gap: 9px;
+  font-weight: 400;
+}
+
+.public-site .category-card__image {
+  aspect-ratio: 4 / 3;
+  overflow: clip;
+  background: var(--public-bg);
+}
+
+.public-site .category-card__image > span {
+  transition: transform 600ms var(--ease-soft);
+}
+
+.public-site .category-card > span:not(.category-card__image) {
+  margin-top: 4px;
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+}
+
+.public-site .category-card small {
+  margin: 0;
+  color: var(--public-muted);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.42;
+  text-wrap: pretty;
+}
+
+.public-site .public-product-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 52px var(--public-gutter);
+}
+
+.public-site .public-product-card > a {
+  height: 100%;
+  color: inherit;
+}
+
+.public-site .public-product-card__media {
+  aspect-ratio: 1;
+  overflow: clip;
+  background: var(--public-surface);
+}
+
+.public-site .public-product-card__image {
+  background-color: var(--public-surface);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  transition: transform 600ms var(--ease-soft);
+}
+
+.public-site .public-product-card__image--empty,
+.public-site .public-article-card__image--empty {
+  background: var(--public-surface);
+}
+
+.public-site .public-product-card__media > span {
+  top: 10px;
+  left: 10px;
+  padding: 6px 9px;
+  background: var(--public-accent);
+  color: var(--public-accent-ink);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.public-site .public-product-card__copy {
+  padding: 14px 0 0;
+}
+
+.public-site .public-product-card__copy > p,
+.public-site .public-article-card > a > div > p {
+  margin: 0;
+  color: var(--public-muted);
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 1.35;
+  text-transform: none;
+}
+
+.public-site .public-product-card h2 {
+  display: -webkit-box;
+  overflow: hidden;
+  margin: 5px 0 8px;
+  font: 500 20px/1.18 var(--font-public), "Segoe UI", sans-serif;
+  letter-spacing: -0.025em;
+  text-wrap: pretty;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.public-site .public-product-card__copy > span {
+  color: var(--public-muted);
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+.public-site .public-product-card__copy > div {
+  margin-top: auto;
+  padding-top: 17px;
+  align-items: center;
+  border: 0;
+}
+
+.public-site .public-product-card__copy strong {
+  padding: 0;
+  font-size: 14px;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+}
+
+.public-site .public-product-card__copy > div > span {
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--public-muted);
+  font-size: 13px;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.public-site .public-product-card__copy svg {
+  width: 15px;
+  height: 15px;
+  transition: transform 180ms var(--ease-out);
+}
+
+.public-site .public-article-grid {
+  gap: 46px var(--public-gutter);
+}
+
+.public-site .public-article-card__image {
+  overflow: clip;
+  background-color: var(--public-bg);
+  transition: transform 600ms var(--ease-soft);
+}
+
+.public-site .public-article-card > a > div {
+  padding: 16px 0 0;
+}
+
+.public-site .public-article-card h2 {
+  margin: 6px 0 10px;
+  font: 500 clamp(22px, 2vw, 28px) / 1.08 var(--font-public), "Segoe UI", sans-serif;
+  letter-spacing: -0.035em;
+}
+
+.public-site .public-article-card > a > div > span {
+  color: var(--public-muted);
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+.public-site .public-article-card strong {
+  margin-top: 17px;
+  padding: 0;
+  border: 0;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.public-site .public-page-hero {
+  padding-block: clamp(74px, 9vw, 126px) clamp(58px, 7vw, 92px);
+  border: 0;
+}
+
+.public-site .public-page-hero--compact {
+  padding-block: clamp(58px, 7vw, 92px);
+}
+
+.public-site .public-page-hero h1 {
+  max-width: 15ch;
+  margin: 0 0 24px -0.04em;
+  font: 500 clamp(3.25rem, 5.7vw, 5rem) / 0.94 var(--font-public), "Segoe UI", sans-serif;
+  letter-spacing: -0.05em;
+  text-wrap: balance;
+}
+
+.public-site .public-page-hero--compact h1 {
+  font-size: clamp(2.8rem, 5vw, 4.5rem);
+}
+
+.public-site .public-page-hero > p:last-child {
+  max-width: 58ch;
+  color: var(--public-muted);
+  font-size: var(--public-lead);
+  line-height: 1.45;
+  text-wrap: pretty;
+}
+
+.public-site .public-listing {
+  padding-block: clamp(54px, 7vw, 96px) clamp(84px, 10vw, 136px);
+}
+
+.public-site .category-grid--catalog {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 52px var(--public-gutter);
+}
+
+.public-site .public-filters {
+  margin-bottom: 62px;
+  padding: 10px;
+  border: 0;
+  background: var(--public-surface);
+}
+
+.public-site .public-filters input,
+.public-site .public-filters select {
+  min-height: 48px;
+  border: 0;
+  background: var(--public-bg);
+  color: var(--public-ink);
+}
+
+.public-site .public-filters button,
+.public-site .public-filters > a {
+  min-height: 48px;
+  border: 0;
+  background: var(--public-accent);
+  color: var(--public-accent-ink);
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.public-site .public-filters > a {
+  background: var(--public-bg);
+  color: var(--public-ink);
+}
+
+.public-site .public-results-heading {
+  margin-bottom: 34px;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 12px var(--public-gutter);
+}
+
+.public-site .public-results-heading h2 {
+  font: 500 clamp(2rem, 3.3vw, 3rem) / 1 var(--font-public), "Segoe UI", sans-serif;
+  letter-spacing: -0.04em;
+}
+
+.public-site .public-results-heading > span {
+  color: var(--public-muted);
+  font-size: 14px;
+}
+
+.public-site .empty-state {
+  min-height: 220px;
+  padding: clamp(28px, 4vw, 52px);
+  border: 0;
+  background: var(--public-surface);
+}
+
+.public-site .empty-state h2 {
+  font: 500 24px/1.15 var(--font-public), "Segoe UI", sans-serif;
+  letter-spacing: -0.025em;
+}
+
+.public-site .empty-state p {
+  font-size: 15px;
+}
+
+.public-site .public-footer {
+  padding-block: clamp(72px, 8vw, 110px);
+  background: var(--public-accent);
+  color: var(--public-accent-ink);
+}
+
+.public-site .public-footer__grid {
+  grid-template-columns: minmax(0, 1.5fr) minmax(180px, 0.7fr) minmax(240px, 1fr);
+  gap: clamp(38px, 5vw, 80px);
+}
+
+.public-site .public-footer__intro {
+  display: grid;
+  gap: 18px;
+}
+
+.public-site .public-footer__name {
+  margin: 0;
+  font: 500 clamp(3rem, 5.2vw, 5rem) / 0.9 var(--font-public), "Segoe UI", sans-serif;
+  letter-spacing: -0.055em;
+}
+
+.public-site .public-footer__grid > div > p:last-child,
+.public-site .public-footer__disclosure,
+.public-site .public-footer__notes {
+  color: var(--public-accent-ink);
+}
+
+.public-site .public-footer__intro > p:last-child {
+  max-width: 38ch;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.public-site .public-footer nav {
+  gap: 9px;
+}
+
+.public-site .public-footer__notes {
+  display: grid;
+  align-content: start;
+  gap: 18px;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.public-site .public-footer__notes p {
+  margin: 0;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .public-site .public-nav a:hover,
+  .public-site .public-footer a:hover,
+  .public-site .text-link:hover {
+    color: inherit;
+    text-decoration-color: currentColor;
+  }
+
+  .public-site .icon-link:hover {
+    background: var(--public-surface);
+  }
+
+  .public-site .button--primary:hover {
+    background: var(--public-ink);
+  }
+
+  .public-site .category-card:hover .category-card__image > span,
+  .public-site .public-product-card:hover .public-product-card__image,
+  .public-site .public-article-card:hover .public-article-card__image {
+    transform: scale(1.025);
+  }
+
+  .public-site .public-product-card:hover .public-product-card__copy svg {
+    transform: translateX(3px);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .public-site .hero-room-gallery__frame {
+    animation: public-room-crossfade 28s linear infinite both;
+  }
+
+  .public-site .hero-room-gallery__frame:nth-child(1) { animation-delay: -1.6s; }
+  .public-site .hero-room-gallery__frame:nth-child(2) { animation-delay: 5.4s; }
+  .public-site .hero-room-gallery__frame:nth-child(3) { animation-delay: 12.4s; }
+  .public-site .hero-room-gallery__frame:nth-child(4) { animation-delay: 19.4s; }
+
+  .public-site .hero-room-gallery.is-paused .hero-room-gallery__frame {
+    animation-play-state: paused;
+  }
+}
+
+@keyframes public-room-crossfade {
+  0% { opacity: 0; }
+  5.714% { opacity: 1; }
+  25% { opacity: 1; }
+  30.714% { opacity: 0; }
+  100% { opacity: 0; }
+}
+
+@media (max-width: 1100px) {
+  .public-site .public-product-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .public-site .public-footer__grid {
+    grid-template-columns: minmax(0, 1.2fr) minmax(180px, 0.8fr);
+  }
+
+  .public-site .public-footer__notes {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 900px) {
+  .public-site .public-header__inner {
+    grid-template-columns: 1fr auto;
+  }
+
+  .public-site .public-nav {
+    display: none;
+  }
+
+  .public-site .mobile-menu {
+    display: block;
+  }
+
+  .public-site .hero {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .public-site .hero__copy {
+    padding: 64px 0 52px;
+  }
+
+  .public-site .hero h1 {
+    font-size: clamp(3.5rem, 9vw, 4.5rem);
+  }
+
+  .public-site .hero-room-gallery {
+    min-height: 500px;
+    aspect-ratio: 16 / 10;
+  }
+
+  .public-site .category-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .public-site .category-grid--catalog {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 760px) {
+  .public-site .public-product-grid,
+  .public-site .public-article-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap-block: 42px;
+  }
+
+  .public-site .section-heading,
+  .public-site .section-heading--editorial {
+    grid-template-columns: 1fr;
+    align-items: start;
+  }
+
+  .public-site .section-heading--editorial > p {
+    justify-self: start;
+  }
+
+  .public-site .public-filters {
+    margin-bottom: 48px;
+  }
+}
+
+@media (max-width: 540px) {
+  .public-site .public-header__inner {
+    min-height: 68px;
+  }
+
+  .public-site .brand__mark {
+    width: 32px;
+    height: 32px;
+  }
+
+  .public-site .hero {
+    width: 100%;
+  }
+
+  .public-site .hero__copy {
+    width: calc(100% - (var(--public-margin) * 2));
+    margin-inline: auto;
+    padding: 54px 0 44px;
+  }
+
+  .public-site .hero h1 {
+    font-size: clamp(2.375rem, 11.5vw, 2.875rem);
+  }
+
+  .public-site .hero__copy > p {
+    margin-top: 22px;
+    font-size: 18px;
+  }
+
+  .public-site .hero__actions {
+    margin-top: 28px;
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .public-site .hero-room-gallery {
+    min-height: 430px;
+    aspect-ratio: 4 / 5;
+  }
+
+  .public-site .hero-room-gallery figcaption {
+    right: 14px;
+    bottom: 14px;
+  }
+
+  .public-site .category-section,
+  .public-site .finds-section,
+  .public-site .guides-section {
+    padding-block: 72px;
+  }
+
+  .public-site .section-heading h2 {
+    font-size: 40px;
+  }
+
+  .public-site .category-grid {
+    gap: 30px 12px;
+  }
+
+  .public-site .category-card > span:not(.category-card__image) {
+    font-size: 16px;
+  }
+
+  .public-site .category-card small {
+    font-size: 13px;
+  }
+
+  .public-site .public-product-grid,
+  .public-site .public-article-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .public-site .public-product-card__copy {
+    padding-top: 13px;
+  }
+
+  .public-site .public-product-card h2 {
+    font-size: 20px;
+  }
+
+  .public-site .public-page-hero {
+    padding-block: 62px 48px;
+  }
+
+  .public-site .public-page-hero h1 {
+    margin-bottom: 20px;
+    font-size: clamp(2.5rem, 10.5vw, 3.25rem);
+  }
+
+  .public-site .public-results-heading {
+    grid-template-columns: 1fr;
+  }
+
+  .public-site .public-footer__grid {
+    grid-template-columns: 1fr;
+    gap: 34px;
+  }
+
+  .public-site .public-footer__notes {
+    grid-column: auto;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .public-site .hero-room-gallery__frame {
+    animation: none;
+    opacity: 0;
+  }
+
+  .public-site .hero-room-gallery__frame:first-child {
+    opacity: 1;
+  }
+}

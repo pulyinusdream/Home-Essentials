@@ -42,7 +42,6 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
         <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Categories", href: "/categories" }, { label: category.name }]} />
       </div>
       <header className="public-page-hero public-page-hero--compact page-width">
-        <p className="eyebrow">Home Essentials category</p>
         <h1>{category.name}</h1>
         <p>{category.description || "Practical recommendations for everyday living."}</p>
       </header>

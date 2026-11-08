@@ -37,8 +37,7 @@ export default async function ProductsPage({
   return (
     <PublicShell>
       <header className="public-page-hero page-width">
-        <p className="eyebrow">Reviewed home finds</p>
-        <h1>Products considered for real life at home.</h1>
+        <h1>Reviewed products for your home</h1>
         <p>
           Clear recommendations, useful context, and verified Amazon.com
           destinations for US shoppers.
@@ -62,7 +61,6 @@ export default async function ProductsPage({
           {search || category ? <Link href="/products">Clear</Link> : null}
         </form>
         <div className="public-results-heading">
-          <p className="eyebrow">Catalog</p>
           <h2 id="product-results-heading">{search ? `Results for “${search}”` : "Published recommendations"}</h2>
           <span>{products.length} {products.length === 1 ? "item" : "items"}</span>
         </div>

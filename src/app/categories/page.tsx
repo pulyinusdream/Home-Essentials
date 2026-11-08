@@ -25,8 +25,7 @@ export default async function CategoriesPage() {
   return (
     <PublicShell>
       <header className="public-page-hero page-width">
-        <p className="eyebrow">Browse by room</p>
-        <h1>Essentials for the way your home works.</h1>
+        <h1>Shop practical finds by room</h1>
         <p>
           Start with a space, then explore practical recommendations and useful
           guides chosen for everyday routines.

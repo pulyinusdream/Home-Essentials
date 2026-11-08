@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 
 import { getCompliantPrice } from "@/services/public/visibility";
 import type { PublicProductCard } from "@/services/public/repository";
@@ -40,9 +41,12 @@ export function ProductCard({ product }: { product: PublicProductCard }) {
                 }).format(price.amount)}
               </strong>
             ) : (
-              <strong>See recommendation</strong>
+              <strong>View recommendation</strong>
             )}
-            <span aria-hidden="true">View details</span>
+            <span>
+              View product details
+              <ArrowRight aria-hidden="true" strokeWidth={1.7} />
+            </span>
           </div>
         </div>
       </Link>

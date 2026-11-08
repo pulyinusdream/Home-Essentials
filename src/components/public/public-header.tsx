@@ -6,7 +6,7 @@ import { Brand } from "@/components/shared/brand";
 const links = [
   ["Home", "/"],
   ["Categories", "/categories"],
-  ["Home Finds", "/products"],
+  ["Products", "/products"],
   ["Guides", "/guides"],
   ["About", "/about"],
 ] as const;
