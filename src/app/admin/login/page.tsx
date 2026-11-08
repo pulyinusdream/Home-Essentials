@@ -59,7 +59,7 @@ export default async function AdminLoginPage({
               <div>
                 <h3>Connect Supabase first</h3>
                 <p>
-                  Add the hosted Supabase URL and public anon key to
+                  Add the hosted Supabase URL and public publishable key to
                   <code>.env.local</code>. The login form will appear after the
                   app restarts.
                 </p>

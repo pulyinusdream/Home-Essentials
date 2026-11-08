@@ -10,6 +10,7 @@ const policies = migration("002_rls_policies.sql");
 const storage = migration("003_storage_setup.sql");
 const functions = migration("004_functions_and_triggers.sql");
 const indexes = migration("005_indexes.sql");
+const publicAffiliateLinks = migration("006_public_affiliate_links.sql");
 const seed = readFileSync(resolve("supabase/seed.sql"), "utf8").toLowerCase();
 
 const applicationTables = [
@@ -50,10 +51,19 @@ describe("Supabase database contract", () => {
     expect(policies).not.toContain("user_metadata");
   });
 
-  it("keeps affiliate links and activity logs out of anonymous reads", () => {
-    expect(policies).not.toMatch(/grant select on table public\.affiliate_links to anon/);
+  it("keeps sensitive writes, click records, and logs out of anonymous access", () => {
     expect(policies).not.toMatch(/grant select on table public\.activity_logs to anon/);
     expect(policies).not.toMatch(/grant insert on table public\.product_clicks to anon/);
+    expect(publicAffiliateLinks).not.toMatch(/grant (?:insert|update|delete).*affiliate_links.*anon/);
+  });
+
+  it("publishes only direct, active links for visible products", () => {
+    expect(publicAffiliateLinks).toContain("grant select on table public.affiliate_links to anon");
+    expect(publicAffiliateLinks).toContain("status = 'active'");
+    expect(publicAffiliateLinks).toContain("last_verified_at is not null");
+    expect(publicAffiliateLinks).toContain("products.status = 'published'");
+    expect(publicAffiliateLinks).toContain("products.published_at <= now()");
+    expect(publicAffiliateLinks).toContain("categories.is_active = true");
   });
 
   it("configures public media with administrator-only writes", () => {

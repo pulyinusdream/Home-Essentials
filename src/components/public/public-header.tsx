@@ -22,7 +22,7 @@ export function PublicHeader() {
           ))}
         </nav>
         <div className="public-header__actions">
-          <Link className="icon-link" href="/products?search=1" aria-label="Search Home Essentials">
+          <Link className="icon-link" href="/products#product-search" aria-label="Search Home Essentials">
             <Search size={19} strokeWidth={1.6} aria-hidden="true" />
           </Link>
           <details className="mobile-menu">

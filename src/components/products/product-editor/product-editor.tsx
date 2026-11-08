@@ -270,7 +270,7 @@ export function ProductEditor({
         </EditorSection>
 
         <EditorSection id="images" number="02" title="Images" description="Use an image you are authorized to publish and describe it for people using assistive technology.">
-          <EditorField label="Primary image URL" name="mainImageUrl" error={firstError(fieldErrors, "mainImageUrl")} hint="Use a public HTTPS image URL. Supabase media uploads will populate this field automatically.">
+          <EditorField label="Primary image URL" name="mainImageUrl" error={firstError(fieldErrors, "mainImageUrl")} hint="Paste a public HTTPS image URL that you are authorized to use.">
             <input id="field-mainImageUrl" name="mainImageUrl" type="url" inputMode="url" defaultValue={product?.main_image_url ?? ""} placeholder="https://…" />
           </EditorField>
           <EditorField label="Image alt text" name="mainImageAlt" error={firstError(fieldErrors, "mainImageAlt")} hint="Describe the product and relevant setting; do not start with ‘image of’.">

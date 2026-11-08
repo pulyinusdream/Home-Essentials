@@ -27,8 +27,9 @@ describe("application shell", () => {
     expect(html).toContain('href="/admin/products/new"');
   });
 
-  it("renders the editorial promise and the required affiliate disclosure", () => {
-    const html = renderToStaticMarkup(<HomePage />);
+  it("renders the editorial promise and the required affiliate disclosure", async () => {
+    const homePage = await HomePage();
+    const html = renderToStaticMarkup(homePage);
 
     expect(html).toContain("Make Your Home Feel More Like Home.");
     expect(html).toContain(
