@@ -63,7 +63,7 @@ Do not store authorization roles in `raw_user_meta_data`. Database policies reso
 - A guide cannot be published without a dek, category, cover image, and valid structured content blocks.
 - Prices default to unavailable. Store price data only when it comes from an approved Amazon API workflow and retain the source timestamp.
 - Product and article rows are publicly readable only after publication. Drafts, affiliate-link records, click analytics, activity logs, and staff profiles remain protected by RLS.
-- The `public-media` bucket accepts only image MIME types up to 5 MiB. Staff write access is enforced by storage policies.
+- The `public-media` bucket accepts only image MIME types up to 5 MiB. Administrator-only write access is enforced by storage policies.
 
 ## Verification
 
