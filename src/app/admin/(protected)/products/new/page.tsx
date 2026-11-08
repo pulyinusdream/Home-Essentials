@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 
-import { ProductEditor } from "@/components/products/product-editor/product-editor";
+import { QuickProductEditor } from "@/components/products/quick-product-editor";
 import { requireStaff } from "@/lib/auth/require-role";
 import { listProductCategories } from "@/services/products/queries";
 
@@ -25,14 +25,11 @@ export default async function NewProductPage() {
           Products
         </Link>
         <div>
-          <p className="eyebrow">New recommendation</p>
           <h1>Add a product</h1>
-          <p>Start with a name, save a draft, and complete each section before publishing.</p>
+          <p>Add the essentials now. Product details, specifications, and advanced search fields remain available after saving.</p>
         </div>
       </header>
-      <ProductEditor
-        product={null}
-        affiliateLink={null}
+      <QuickProductEditor
         categories={categories}
         role={session.profile.role}
       />
