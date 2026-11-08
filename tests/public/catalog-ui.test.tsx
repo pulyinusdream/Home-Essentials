@@ -1,3 +1,5 @@
+import { readFileSync } from "node:fs";
+
 import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it } from "vitest";
 
@@ -23,6 +25,8 @@ const product = {
   },
 } satisfies PublicProductCard;
 
+const publicCss = readFileSync("src/app/public.css", "utf8");
+
 describe("public catalog cards", () => {
   it("gives a product specimen one clear destination and compliant action", () => {
     const html = renderToStaticMarkup(<ProductCard product={product} />);
@@ -34,6 +38,35 @@ describe("public catalog cards", () => {
     expect(html).toContain("View product details");
     expect(html).toContain(
       'aria-label="Black adjustable overbed table with wheels"',
+    );
+  });
+});
+
+describe("public design system contract", () => {
+  it("keeps keyboard focus visible on the accent footer", () => {
+    expect(publicCss).toMatch(
+      /\.public-site \.public-footer :focus-visible\s*\{[^}]*outline-color:\s*var\(--public-accent-ink\)/s,
+    );
+  });
+
+  it("gives navigation and text links a 44px minimum target", () => {
+    expect(publicCss).toMatch(
+      /\.public-site \.public-nav a,[\s\S]*?\.public-site \.text-link\s*\{[^}]*min-height:\s*44px;[^}]*display:\s*inline-flex;/,
+    );
+  });
+
+  it("maps retained public headings onto the public typeface", () => {
+    expect(publicCss).toContain(
+      '--font-display: var(--font-public), "Segoe UI", sans-serif;',
+    );
+  });
+
+  it("styles introduction copy independently from optional metadata", () => {
+    expect(publicCss).toContain(
+      ".public-site .public-page-hero > p:not(.public-page-meta)",
+    );
+    expect(publicCss).not.toContain(
+      ".public-site .public-page-hero > p:last-child",
     );
   });
 });

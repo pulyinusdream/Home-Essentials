@@ -18,6 +18,8 @@ body:has(> .public-site) {
   --public-body: 1rem;
   --public-lead: 1.25rem;
   --public-heading: clamp(2.25rem, 1.72rem + 2.2vw, 3.75rem);
+  --font-body: var(--font-public), "Segoe UI", sans-serif;
+  --font-display: var(--font-public), "Segoe UI", sans-serif;
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
   --ease-soft: cubic-bezier(0.33, 1, 0.68, 1);
   --charcoal: var(--public-ink);
@@ -49,6 +51,10 @@ body:has(> .public-site) {
 .public-site :focus-visible {
   outline: 2px solid var(--public-focus);
   outline-offset: 3px;
+}
+
+.public-site .public-footer :focus-visible {
+  outline-color: var(--public-accent-ink);
 }
 
 .public-site .page-width,
@@ -95,6 +101,9 @@ body:has(> .public-site) {
 .public-site .public-nav a,
 .public-site .public-footer a,
 .public-site .text-link {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
   text-decoration-line: underline;
   text-decoration-color: transparent;
   text-decoration-thickness: 0.07em;
@@ -474,15 +483,16 @@ body:has(> .public-site) {
   font-size: clamp(2.8rem, 5vw, 4.5rem);
 }
 
-.public-site .public-page-hero > p:last-child {
+.public-site .public-page-hero > p:not(.public-page-meta) {
   max-width: 58ch;
+  margin: 0;
   color: var(--public-muted);
   font-size: var(--public-lead);
   line-height: 1.45;
   text-wrap: pretty;
 }
 
-.public-site .public-page-meta {
+.public-site .public-page-hero > .public-page-meta {
   margin: 18px 0 0;
   color: var(--public-muted);
   font-size: var(--public-small);

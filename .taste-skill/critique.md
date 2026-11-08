@@ -33,3 +33,15 @@ Top three problems (most visible first), each with the screenshot it shows in an
 1. No stranger-visible layout or hierarchy issue remains in `desktop-fold.jpg`; the hero, room index, and product specimen now share one clear editorial system.
 2. No responsive overflow or crowding remains in `tablet-page-01.jpg`; the compact specimen preserves readable copy without becoming a large shopping card.
 3. No action is required from `mobile-page-01.jpg`; the product becomes a concise horizontal row, and the long title and disclosure stay legible without invented commerce data.
+
+ROUND 4
+Seen in one second: The final catalogue remains calm and compact, with a more breathable footer navigation after the accessibility review.
+Idea (one sentence): On this page, each reviewed home essential becomes a labelled specimen in a calm household catalogue.
+Live thing: Visitors can choose a room or recommendation while the principal room photograph crossfades slowly through the catalogue’s four spaces.
+Layout words by section: hero=split / categories=index / products=specimen-row / footer=field
+Scores: design 7.8 · usability 8.5 · creativity 7.3 · content 7.9 → overall 7.9
+Caps applied: None. The inspector reports zero FAILs; the no-footage warning remains intentionally defended because no truthful owner-supplied product or process footage exists.
+Top three problems (most visible first), each with the screenshot it shows in and the fix:
+1. No new visual defect appears in `desktop-page-01.jpg`; larger footer link targets add breathing room without disturbing the three-column composition.
+2. No crowding appears in `tablet-page-01.jpg`; the footer reflows cleanly while the compact product specimen remains the dominant action.
+3. No overflow appears in `mobile-page-01.jpg`; the longer footer is an intentional accessibility tradeoff for full 44 px navigation targets.
